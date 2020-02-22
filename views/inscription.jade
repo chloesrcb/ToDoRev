@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= "Inscription"
+  form
+    input(type='text',name='Nom')
+    input(type='text',name='Prenom')
+    input(type='text',name='email')
+    input(type='text',name='mdp')
+    button(type='submit') send
