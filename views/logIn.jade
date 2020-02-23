@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1= 'LogIn'
-  form
+  form(action='' method='post')
     input(type='text',name='email')
-    input(type='text',name='mdp')
+    input(type='password',name='mdp')
     button(type='submit') send
