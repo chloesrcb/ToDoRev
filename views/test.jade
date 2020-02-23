@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    h1= "Inscription"
+    form(method='post')
+        input(type='text',name='nom')
+        input(type='text',name='prenom')
+        input(type='text',name='email')
+        input(type='password',name='mdp')
+        input(type='text',name='anneeEtude')
+        button(type='submit') send
+
