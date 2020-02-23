@@ -2,9 +2,10 @@ extends layout
 
 block content
   h1= "Inscription"
-  form
-    input(type='text',name='Nom')
-    input(type='text',name='Prenom')
+  form(method='post')
+    input(type='text',name='nom')
+    input(type='text',name='prenom')
     input(type='text',name='email')
-    input(type='text',name='mdp')
+    input(type='password',name='mdp')
+    input(type='text',name='anneeEtude')
     button(type='submit') send
