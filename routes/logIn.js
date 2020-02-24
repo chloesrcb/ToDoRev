@@ -4,7 +4,7 @@ var userCtrl = require('./usersCtrl');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('logIn',{});
+  res.render('login',{});
 });
 
 router.post('/',userCtrl.logIn);

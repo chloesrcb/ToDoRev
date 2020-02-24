@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body(id="register-page")
+    .container-fluid
+        p(class="title centerText") INSCRIPTION
+        .container.col-xs-12.col-sm-12.col-md-5.col-lg-5.col-xl-5
+            form(class="login" method='post')
+                .form-group
+                    label(for="nom") Nom
+                    input(type="text" id="nom" class="form-control" placeholder="Martin")
+                
+                .form-group
+                    label(for="prenom") Prénom
+                    input(type="text" id="prenom" class="form-control" placeholder="Alice")
+                //mettre un menu déroulant pour année ou type d'étude : Collège-Lycée-Supérieur
+                .form-group
+                    label(for="anneeEtude") Année d'étude
+                    input(type="text" id="etude" class="form-control" placeholder="L2")
+                
+                .form-group
+                    label(for="email") Email
+                    input(type="text" id="email" class="form-control" placeholder="example@mail.com")
+
+                .form-group
+                    label(for="mdp") Mot de passe
+                    input(type="text" id="mdp" class="form-control" placeholder="...........")
+                    br
+                    button(type="button" class="btn btn-light col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 btm-custom") Retour
+                    button(type="submit" class="btn btn-info col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 btn-custom") Valider
+            

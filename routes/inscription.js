@@ -4,7 +4,7 @@ var userCtrl = require('./usersCtrl');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('inscription');
+  res.render('register');
 });
 
 router.post('/',userCtrl.register);

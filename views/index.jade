@@ -1,16 +1,20 @@
-extends layout
+//PAGE D'ACCUEIL DU SITE
 
-block content
-  h1= title
-  p(style='white-space:pre;')
-    |Explications
-    |_______________________
-    |____________________
-
-  a(href='/logIn') Log
-  a(href='/inscription') S'inscrire
-
-  p(style='white-space:pre;')
-    |A propos
-    |____________________________
-    |____________________________
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body(id="index-page")
+      .container-fluid
+        img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="logo", class="center")
+        .container.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xl-8
+          p explications du site
+            |Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            |Voluptas ipsam maxime eius animi rem quisquam quae praesentium perspiciatis provident soluta repellendus, officiis nihil recusandae porro ratione architecto culpa suscipit totam?
+          div
+            button(type="submit" class="btn btn-info col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 btn-custom") S'inscrire
+            button(type="submit" class="btn btn-info col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 btn-custom") Se connecter
+        
