@@ -60,7 +60,7 @@
 
 .blue {
     height: 200px;
-    background-color: rgb(63, 147, 150)
+    background-color: rgb(136, 202, 204)
     
 }
 
@@ -71,8 +71,7 @@
 
 /*Bouton*/
 .btn-custom{
-    margin-left: 5px;
-    margin-right: 5px;
+    padding: 5px;
 }
 
 /*Arrière plan*/
@@ -133,9 +132,21 @@ body, html {
 }
 
 #small-logo{
-  margin-top: 1em;
-  margin-bottom: 1em;
   margin-left: auto;
-  width: 7em;
-  height: auto;
+  width: auto;
+  height: 3em;
 }
+
+/*NavBar*/
+#ItemNav{
+  padding-right: 12px;
+  padding-left: 12px;
+}
+#lastItemNav{
+  padding-right: 30px;
+}
+
+#matiereItem{
+  padding-right: 10px;
+}
+

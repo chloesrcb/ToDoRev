@@ -1,0 +1,39 @@
+form(class="login" method='post')
+                .form-group
+                    label(for="nom validationServer03")   
+                    //input(type="text" id="nom" class="form-control" placeholder="Nom") 
+                    input#validationServer03.form-control.is-invalid(type='text', required='',placeholder="Nom")
+                    .invalid-feedback
+                        | Veuillez entrer votre nom.
+                .form-group
+                    label(for="prenom validationServer03")
+                    //input(type="text" id="prenom" class="form-control" placeholder="Prénom")
+                    input#validationServer03.form-control.is-invalid(type='text', required='',placeholder="Prénom")
+                    .invalid-feedback
+                        | Veuillez entrer votre prénom.
+
+                .form-group
+                    select.custom-select
+                        option(selected='') Niveau d'études
+                        option(value='1') Collège
+                        option(value='2') Lycée
+                        option(value='3') Supérieur
+                        option(value='4') Autre
+
+                .form-group
+                    label(for="email validationServer03") 
+                    //input(type="text" id="email" class="form-control" placeholder="email@exemple.com")
+                    input#validationServer03.form-control.is-invalid(type='text', required='',placeholder="Adresse mail")
+                    .invalid-feedback
+                        | Veuillez entrer votre adresse mail.
+
+                .form-group
+                    label(for="mdp validationServer03")
+                    //input(type="text" id="mdp" class="form-control" placeholder="Mot de passe")
+                    input#validationServer03.form-control.is-invalid(type='text', required='',placeholder="Mot de passe")
+                    .invalid-feedback
+                        | Veuillez entrer votre mot de passe.
+                    br
+                    button(type="button" class="btn btn-light col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 btm-custom") Retour
+                    button(type="submit" class="btn btn-info col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 btn-custom") Valider
+            

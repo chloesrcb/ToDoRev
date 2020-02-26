@@ -11,24 +11,27 @@ html
         .container.col-xs-12.col-sm-12.col-md-5.col-lg-5.col-xl-5
             form(class="login" method='post')
                 .form-group
-                    label(for="nom") Nom
-                    input(type="text" id="nom" class="form-control" placeholder="Martin")
+                    label(for="nom")   
+                    input(type="text" id="nom" class="form-control" placeholder="Nom") 
                 
                 .form-group
-                    label(for="prenom") Prénom
-                    input(type="text" id="prenom" class="form-control" placeholder="Alice")
-                //mettre un menu déroulant pour année ou type d'étude : Collège-Lycée-Supérieur
+                    label(for="prenom")
+                    input(type="text" id="prenom" class="form-control" placeholder="Prénom")
+                br
                 .form-group
-                    label(for="anneeEtude") Année d'étude
-                    input(type="text" id="etude" class="form-control" placeholder="L2")
-                
+                    select.custom-select
+                        option(selected='') Niveau d'études
+                        option(value='1') Collège
+                        option(value='2') Lycée
+                        option(value='3') Supérieur
+                        option(value='4') Autre
                 .form-group
-                    label(for="email") Email
-                    input(type="text" id="email" class="form-control" placeholder="example@mail.com")
+                    label(for="email") 
+                    input(type="text" id="email" class="form-control" placeholder="Adresse mail")
 
                 .form-group
-                    label(for="mdp") Mot de passe
-                    input(type="text" id="mdp" class="form-control" placeholder="...........")
+                    label(for="mdp")
+                    input(type="text" id="mdp" class="form-control" placeholder="Mot de passe")
                     br
                     button(type="button" class="btn btn-light col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 btm-custom") Retour
                     button(type="submit" class="btn btn-info col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 btn-custom") Valider

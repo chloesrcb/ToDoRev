@@ -1,0 +1,26 @@
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    a.navbar-brand(href='#') 
+        img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="small-logo", class="d-inline-block align-top")
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+        li.nav-item(id="ItemNav")
+            a.nav-link(href='#')
+                | Révisions 
+            span.sr-only (current)
+        li.nav-item(id="ItemNav")
+            a.nav-link(href='#') Examens
+        li.nav-item(id="ItemNav")
+            a.nav-link(href='#') Se tester
+        li.nav-item(id="ItemNav")
+            a.nav-link(id="lastItemNav" href='#') A faire
+        li.nav-item.dropdown(id="matiereItem")
+            a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                | Sélectionnez une matière
+            .dropdown-menu(aria-labelledby='navbarDropdown')
+                a.dropdown-item(href='#') Anglais
+                a.dropdown-item(href='#') Maths
+                .dropdown-divider
+                a.dropdown-item(href='#') + Ajouter une matière
