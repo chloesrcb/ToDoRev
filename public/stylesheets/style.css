@@ -84,7 +84,7 @@ body, html {
   background-image: url("../images/texture-turquoise-watercolor.jpg");
 }
 
-#login-page #register-page {
+#login-page , #register-page {
   /* The image used */
   background-image: url("../images/circle-turquoise-watercolor.jpg");
 
