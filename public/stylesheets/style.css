@@ -31,10 +31,7 @@
 }
 
 /*partie de page*/
-.login{
-    margin: 50px;
 
-}
 .space{
   margin-left: 10px;
   margin-right: 10px;
@@ -73,6 +70,7 @@
 .btn-custom{
     padding: 5px;
 }
+
 
 /*Arrière plan*/
 /*Background par page et entête*/
@@ -150,3 +148,11 @@ body, html {
   padding-right: 10px;
 }
 
+#cestParti{
+  text-decoration: none;
+}
+
+#menuMatiere{
+  padding-left: 0%;
+
+}

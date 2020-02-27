@@ -9,30 +9,13 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body(id="index-page")
       header
-        nav.navbar.navbar-expand-lg.navbar-light.bg-light
-          a.navbar-brand(href='#') 
-            img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="small-logo", class="d-inline-block align-top")
-          button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
-            span.navbar-toggler-icon
-          #navbarSupportedContent.collapse.navbar-collapse
-          ul.navbar-nav.mr-auto
-            li.nav-item(id="ItemNav")
-              a.nav-link(href='#')
-                | Connexion 
-              span.sr-only (current)
-            li.nav-item(id="ItemNav")
-              a.nav-link(href='#') 
-                | Inscription
-            li.nav-item(id="ItemNav")
-              a.nav-link(href='#') 
-                | A propos
-        
+        include first-navbar.jade
       .container-fluid
         img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="logo", class="center")
         .container.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xl-8
           p explications du site
             |Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             |Voluptas ipsam maxime eius animi rem quisquam quae praesentium perspiciatis provident soluta repellendus, officiis nihil recusandae porro ratione architecto culpa suscipit totam?
-          div
-            button(type="button" class="btn btn-info center") C'est parti !
-            
+            //button(type="button" class="btn btn-info center") C'est parti !
+          a(href='/login' id="cestParti")
+            input(type='button', class="btn btn-info center", value="C'est parti !") 

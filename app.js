@@ -6,10 +6,16 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var logInRouter = require('./routes/logIn');
+var loginRouter = require('./routes/login');
 var inscriptionRouter = require('./routes/inscription');
 var usersRouter = require('./routes/users');
 var testRouter = require('./routes/test');
+
+var homeRouter = require('./routes/home');
+var examRouter = require('./routes/exam');
+var quizzRouter = require('./routes/quizz');
+var todoRouter = require('./routes/todo');
+var revisionsRouter = require('./routes/revisions');
 
 var app = express();
 
@@ -29,8 +35,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/inscription', inscriptionRouter);
-app.use('/logIn', logInRouter);
+app.use('/login', loginRouter);
 app.use('/test', testRouter);
+app.use('/home', homeRouter);
+app.use('/examens', examRouter);
+app.use('/a_faire', todoRouter);
+app.use('/revisions', revisionsRouter);
+app.use('/se_tester', quizzRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

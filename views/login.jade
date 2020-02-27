@@ -6,15 +6,27 @@ html
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body(id="login-page")
+    header
+        include first-navbar.jade
+
     .container-fluid
         p(class="title centerText") CONNEXION
-        .container.col-xs-8.col-sm-4.col-md-4.col-lg-4
-            form(class="login" method='post')
-                .form-group
-                    label(for="email") Email
-                    input(type="text" id="email" class="form-control" placeholder="example@mail.com")
-                .form-group
-                    label(for="mdp") Mot de passe
-                    input(type="text" id="mdp" class="form-control" placeholder="...........")
-                button(type="submit" class="btn btn-info center") Se connecter
-            
+        .container.bg-light.col-xs-8.col-sm-7.col-md-6.col-lg-6.col-xl-4
+          form.px-4.py-3(method="post")
+            .form-group
+              label(for='email') Adresse mail
+              input#exampleDropdownFormEmail1.form-control(type='email', placeholder='email@exemple.com')
+            .form-group
+              label(for='mdp') Mot de passe
+              input#exampleDropdownFormPassword1.form-control(type='mdp', placeholder='Mot de passe')
+            .form-group
+              .form-check
+                label(for='anneeEtude')
+                input#dropdownCheck.form-check-input(type='checkbox')
+                label.form-check-label(for='dropdownCheck')
+                  | Se souvenir de moi
+            button.btn.btn-info(type='submit') Se connecter
+          .dropdown-divider
+          a.dropdown-item(href='/inscription') Pas encore inscrit ? 
+          a.dropdown-item(href='') Mot de passe oublié ?
+    

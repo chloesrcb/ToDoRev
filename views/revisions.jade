@@ -1,5 +1,3 @@
-//PAGE REVISIONS
-
 doctype html
 html
   head
@@ -7,6 +5,10 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-
-  body(id="home-page")
     
+  body(id="home-page")
+    head
+      include navbar.jade
+    
+    footer
+      include footer.jade

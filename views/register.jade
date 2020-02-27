@@ -6,9 +6,11 @@ html
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body(id="register-page")
+    header
+        include first-navbar.jade
     .container-fluid
         p(class="title centerText") INSCRIPTION
-        .container.col-xs-12.col-sm-12.col-md-5.col-lg-5.col-xl-5
+        .container.col-xs-12.col-sm-12.col-md-5.col-lg-5.col-xl-5.bg-light
             form(class="login" method='post')
                 .form-group
                     label(for="nom")   
@@ -33,6 +35,9 @@ html
                     label(for="mdp")
                     input(type="text" id="mdp" class="form-control" placeholder="Mot de passe")
                     br
-                    button(type="button" class="btn btn-light col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 btm-custom") Retour
+
+                    a(href='/' id="retour")
+                        input(type='button', class="btn btn-light col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4", value="Retour") 
+                    
                     button(type="submit" class="btn btn-info col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 btn-custom") Valider
             
