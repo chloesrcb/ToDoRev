@@ -2,7 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Ligne = sequelize.define('Ligne', {
     libLigne: DataTypes.STRING,
-    id_Matiere: DataTypes.INTEGER
+    id_Matiere: DataTypes.INTEGER,
+    numLigne: DataTypes.INTEGER
   }, {});
   Ligne.associate = function(models) {
     // associations can be defined here

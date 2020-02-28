@@ -12,7 +12,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      mdp: {
+      password: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -21,10 +21,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       prenom: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      anneeEtude: {
         allowNull: false,
         type: Sequelize.STRING
       },

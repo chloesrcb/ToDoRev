@@ -20,6 +20,10 @@ module.exports = {
           key: 'id'
         }
       },
+      numLigne: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

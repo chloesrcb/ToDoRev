@@ -5,12 +5,11 @@ module.exports = {
     register: function(req, res){
         //Params
         var email = req.body.email;
-        var mdp = req.body.mdp;
+        var password = req.body.password;
         var nom = req.body.nom;
         var prenom = req.body.prenom;
-        var anneeEtude = req.body.anneeEtude;
         
-        if(email==null || mdp==null || nom==null || prenom==null || anneeEtude==null){
+        if(email==null || password==null || nom==null || prenom==null){
             return res.status(400).json({'error': 'missing parameters'});
         }
 
@@ -20,10 +19,10 @@ module.exports = {
         })
         .then(function(userFound){
             if(!userFound){
-                bcrypt.hash(mdp,5,function(err, bcryptedMdp){
+                bcrypt.hash(pasword,5,function(err, bcryptedMdp){
                     var newUser = models.User.create({
                         email: email,
-                        mdp : bcryptedMdp,
+                        password : bcryptedMdp,
                         nom: nom,
                         prenom: prenom,
                         anneeEtude: anneeEtude
@@ -45,8 +44,8 @@ module.exports = {
     logIn: function(req,res){
         //Param
         var email = req.body.email;
-        var mdp = req.body.mdp;
-        if(email==null || mdp==null ){
+        var password = req.body.password;
+        if(email==null || password==null ){
             return res.status(400).json({'error': 'missing parameters'});
         }
         models.User.findOne({
@@ -54,7 +53,7 @@ module.exports = {
         })
         .then(function(userFound){
             if(userFound){
-                bcrypt.compare(mdp, userFound.mdp, function(errBycrypt, resBycrypt){
+                bcrypt.compare(password, userFound.password, function(errBycrypt, resBycrypt){
                     if(resBycrypt){
                         return res.status(200).json({
                             'userId': userFound.id,

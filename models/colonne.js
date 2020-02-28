@@ -2,7 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Colonne = sequelize.define('Colonne', {
     LibColonne: DataTypes.STRING,
-    id_Matiere: DataTypes.INTEGER
+    id_Matiere: DataTypes.INTEGER,
+    numColonne: DataTypes.INTEGER
   }, {});
   Colonne.associate = function(models) {
     // associations can be defined here
