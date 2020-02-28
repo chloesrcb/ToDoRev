@@ -13,7 +13,6 @@ html
   body(id="home-page")
     header
         include navbar.jade
-
     //#menuMatiere.container 
           .row
             .col-md-4.mr-auto
@@ -35,10 +34,9 @@ html
             ul.flex-md-column.flex-row.navbar-nav.w-100.justify-content-between
               li.nav-item
                 p Matières
-              li.nav-item
-                a.nav-link.pl-0(href='#') Maths
-              li.nav-item
-                a.nav-link.pl-0(href='#') Anglais
+              each matiere in matieresList
+                li.nav-item
+                  a.nav-link.pl-0(href='#')=matiere.dataValues.libelle_Matiere
               li.nav-item
                 a.nav-link.pl-0(href='#') + Ajouter 
 

@@ -14,19 +14,19 @@ html
             form(class="login" method='post')
                 .form-group
                     label(for="nom")   
-                    input(type="text" id="nom" class="form-control" placeholder="Nom") 
+                    input(type="text" name='nom' class="form-control" placeholder="Nom") 
                 
                 .form-group
                     label(for="prenom")
-                    input(type="text" id="prenom" class="form-control" placeholder="Prénom")
+                    input(type="text" name='prenom' class="form-control" placeholder="Prénom")
                     
                 .form-group
                     label(for="email") 
-                    input(type="text" id="email" class="form-control" placeholder="Adresse mail")
+                    input(type="text" name='email' class="form-control" placeholder="Adresse mail")
 
                 .form-group
                     label(for="password")
-                    input(type="password" id="mdp" class="form-control" placeholder="Mot de passe")
+                    input(type="password" name='password' class="form-control" placeholder="Mot de passe")
                     br
 
                     a(href='/' id="retour")

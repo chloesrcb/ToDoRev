@@ -20,7 +20,8 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
                 a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
                     | Sélectionnez une matière
                 .dropdown-menu(aria-labelledby='navbarDropdown')
-                    a.dropdown-item(href='#') Anglais
+                    each matiere in matieresList
+                        a.dropdown-item(href='#')=matiere.dataValues.libelle_Matiere
                     a.dropdown-item(href='#') Maths
                     .dropdown-divider
                     a.dropdown-item(href='#') + Ajouter une matière

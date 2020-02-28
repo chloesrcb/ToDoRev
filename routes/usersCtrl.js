@@ -1,6 +1,7 @@
 var bcrypt  = require('bcrypt');
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
+
 module.exports = {
     register: function(req, res){
         //Params
@@ -14,18 +15,16 @@ module.exports = {
         }
 
         models.User.findOne({
-            attributes: ['email'],
             where: {email: email}
         })
         .then(function(userFound){
             if(!userFound){
-                bcrypt.hash(pasword,5,function(err, bcryptedMdp){
+                bcrypt.hash(password,5,function(err, bcryptedMdp){
                     var newUser = models.User.create({
                         email: email,
                         password : bcryptedMdp,
                         nom: nom,
-                        prenom: prenom,
-                        anneeEtude: anneeEtude
+                        prenom: prenom
                     })
                     .then(function(newUser){
                         return res.status(201).json({'userId': newUser.id})
@@ -35,10 +34,10 @@ module.exports = {
                     });
                 })
             }else{
-                return res.status(409).json({ 'error': 'user already exist'});
+                return res.status(409).json({ 'error': 'user already exists'});
             }
         }).catch(function(err){
-            return res.status(500).json({'error': 'unable to verify is user already exist'});
+            return res.status(500).json({'error': 'unable to verify if user already exists'});
         });
     },
     logIn: function(req,res){
@@ -55,10 +54,10 @@ module.exports = {
             if(userFound){
                 bcrypt.compare(password, userFound.password, function(errBycrypt, resBycrypt){
                     if(resBycrypt){
-                        return res.status(200).json({
-                            'userId': userFound.id,
-                            'token': jwtUtils.generateTokenForUser(userFound)
-                        });
+                        var token=jwtUtils.generateTokenForUser(userFound);
+                        res.cookie('token',token,{maxAge:3600000, httpOnly: true})
+                        res.status(200)
+                        return res.redirect("/home");
                     }else{
                         return res.status(403).json({'error': 'invalid password'});
                     }
@@ -69,6 +68,21 @@ module.exports = {
             }
         }).catch(function(err){
             return res.status(500).json({'error': 'unable to verify user'});
+        });
+    },
+    getClient: function(id,req,res,callback){
+        
+        models.User.findOne({
+            where: {id: id}
+        })
+        .then(function(userFound){
+            if(userFound){
+                callback( userFound.dataValues);
+            }else{
+                return res.status(404).json({ 'error': 'user not exist in DB' });
+            }
+        }).catch(function(err){
+            return res.status(500).json({'error': 'unable to find user'});
         });
     }
 
