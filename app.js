@@ -16,6 +16,7 @@ var examRouter = require('./routes/exam');
 var quizzRouter = require('./routes/quizz');
 var todoRouter = require('./routes/todo');
 var revisionsRouter = require('./routes/revisions');
+var matieresRouter = require('./routes/matieres');
 
 var app = express();
 
@@ -38,10 +39,12 @@ app.use('/inscription', inscriptionRouter);
 app.use('/login', loginRouter);
 app.use('/test', testRouter);
 app.use('/home', homeRouter);
-app.use('/examens', examRouter);
-app.use('/a_faire', todoRouter);
-app.use('/revisions', revisionsRouter);
-app.use('/se_tester', quizzRouter);
+//app.use('/matiere/*', matieresRouter);
+
+app.use('/matiere/*/se_tester', quizzRouter);
+app.use('/matiere/*/examens', examRouter);
+app.use('/matiere/*/revisions', revisionsRouter);
+app.use('/matiere/*/a_faire', todoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

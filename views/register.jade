@@ -1,11 +1,6 @@
-doctype html
-html
-  head
-    meta(charset="utf-8")
-    title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body(id="register-page")
+include layout.jade
+
+body(id="register-page")
     header
         include first-navbar.jade
     .container-fluid
@@ -32,5 +27,7 @@ html
                     a(href='/' id="retour")
                         input(type='button', class="btn btn-light col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4", value="Retour") 
                     
-                    button(type="submit" class="btn btn-info col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 btn-custom") Valider
-            
+                    button(type="submit" class="btn btn-info col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4") Valider
+    footer
+        include footer.jade
+        

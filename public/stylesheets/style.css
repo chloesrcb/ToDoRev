@@ -14,7 +14,7 @@
 }
 
 .big {
-    font-size: 2em; 
+  font-size: 2em; 
 	line-height: 2em;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .subtitle{
-    font-size: 2.5em;
+    font-size: 2em;
     line-height: 1.5em;
 }
 
@@ -36,9 +36,7 @@
   margin-left: 10px;
   margin-right: 10px;
 }
-.colonne {
-    background-color: aquamarine;
-}
+
 
 /*Position*/
 .centerText{
@@ -52,76 +50,37 @@
 
 }
 
-
-/*Couleur*/
-
-.blue {
-    height: 200px;
-    background-color: rgb(136, 202, 204)
-    
-}
-
-.green {
-    height: 200px;
-    background-color: darkseagreen;
-}
-
-/*Bouton*/
-.btn-custom{
-    padding: 5px;
-}
-
-
 /*Arrière plan*/
-/*Background par page et entête*/
+/*Background selon page*/
 body, html {
   height: 100%;
 }
 
-.entete{
-  background-image: url("../images/texture-turquoise-watercolor.jpg");
-}
-
 #login-page , #register-page {
-  /* The image used */
   background-image: url("../images/circle-turquoise-watercolor.jpg");
-
-  /* Full height */
   height: 100%;
-
-  /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 #home-page {
-  /* The image used */
   background-image: url("../images/texture-turquoise-watercolor.jpg");
-
-  /* Full height */
   height: 100%;
-
-  /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 #index-page {
-  /* The image used */
   background-image: url("../images/texture-turquoise-watercolor.jpg");
-
-  /* Full height */
   height: 100%;
-
-  /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-/*images*/
-
+/*logo ToDoRev taille*/
 #logo{
   margin-top: 5em;
   margin-left: auto;
@@ -140,9 +99,6 @@ body, html {
   padding-right: 12px;
   padding-left: 12px;
 }
-#lastItemNav{
-  padding-right: 30px;
-}
 
 #matiereItem{
   padding-right: 10px;
@@ -152,7 +108,4 @@ body, html {
   text-decoration: none;
 }
 
-#menuMatiere{
-  padding-left: 0%;
 
-}

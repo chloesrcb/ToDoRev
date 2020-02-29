@@ -1,32 +1,30 @@
-doctype html
-html
-  head
-    meta(charset="utf-8")
-    title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body(id="login-page")
-    header
-        include first-navbar.jade
+include layout.jade
 
-    .container-fluid
-        p(class="title centerText") CONNEXION
-        .container.bg-light.col-xs-8.col-sm-7.col-md-6.col-lg-6.col-xl-4
-          form.px-4.py-3(method="post")
-            .form-group
-              label(for='email') Adresse mail
-              input#exampleDropdownFormEmail1.form-control(type='email',name='email', placeholder='email@exemple.com')
-            .form-group
-              label(for='password') Mot de passe
-              input#exampleDropdownFormPassword1.form-control(type='password',name='password', placeholder='Mot de passe')
-            .form-group
-              .form-check
-                label(for='rememberMe')
-                input#dropdownCheck.form-check-input(type='checkbox')
-                label.form-check-label(for='dropdownCheck')
-                  | Se souvenir de moi
-            button.btn.btn-info(type='submit') Se connecter
-          .dropdown-divider
-          a.dropdown-item(href='/inscription') Pas encore inscrit ? 
-          a.dropdown-item(href='') Mot de passe oublié ?
-    
+body(id="login-page")
+  header
+      include first-navbar.jade
+
+  .container-fluid
+      p(class="title centerText") CONNEXION
+      .container.bg-light.col-xs-8.col-sm-7.col-md-6.col-lg-6.col-xl-4
+        form.px-4.py-3(method="post")
+          .form-group
+            label(for='email') Adresse mail
+            input#exampleDropdownFormEmail1.form-control(type='email',name='email', placeholder='email@exemple.com')
+          .form-group
+            label(for='password') Mot de passe
+            input#exampleDropdownFormPassword1.form-control(type='password',name='password', placeholder='Mot de passe')
+          .form-group
+            .form-check
+              label(for='rememberMe')
+              input#dropdownCheck.form-check-input(type='checkbox')
+              label.form-check-label(for='dropdownCheck')
+                | Se souvenir de moi
+          button.btn.btn-info(type='submit') Se connecter
+        .dropdown-divider
+        a.dropdown-item(href='/inscription') Pas encore inscrit ? 
+        a.dropdown-item(href='') Mot de passe oublié ?
+
+  footer
+      include footer.jade
+  

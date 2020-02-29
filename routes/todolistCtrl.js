@@ -15,12 +15,13 @@ module.exports = {
                 id_Matiere:idMatiere }
         })
         .then(function(itemFound){
+            console.log(itemFound);
             if(!itemFound){
                 var newItem = models.todolistitem.create({
                     contenu: contenu,
-                    done: '0',
+                    done: 0,
                     id_Matiere:idMatiere,
-                    MatiereId:id
+                    MatiereId:idMatiere
                 })
                 .then(function(newItem){
                     res.status(200)

@@ -1,3 +1,4 @@
+-var currentMatiere=undefined;
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
     a.navbar-brand(href='/home') 
         img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="small-logo", class="d-inline-block align-top")
@@ -11,25 +12,44 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
                 script(type='text/javascript').
                     function change_dropdown(newText){
                         document.getElementById("navbarDropdown").innerHTML=newText;
+                        currentMatiere=newText;
                         document.getElementById("ItemRevision").setAttribute("class","nav-link");
                         document.getElementById("ItemExamen").setAttribute("class","nav-link");
                         document.getElementById("ItemQuizz").setAttribute("class","nav-link");
                         document.getElementById("ItemTodo").setAttribute("class","nav-link");
+
+                        
+                        document.getElementById("ItemRevision").setAttribute("href","/matiere/"+currentMatiere+"/revisions");
+                        document.getElementById("ItemExamen").setAttribute("href","/matiere/"+currentMatiere+"/examens");
+                        document.getElementById("ItemQuizz").setAttribute("href","/matiere/"+currentMatiere+"/se_tester");
+                        document.getElementById("ItemTodo").setAttribute("href","/matiere/"+currentMatiere+"/a_faire");
                     }
                 .dropdown-menu(aria-labelledby='navbarDropdown')
                     
                     each matiere in matieresList
 
                         a.dropdown-item(onclick="change_dropdown('#{matiere.dataValues.libelle_Matiere}')")=matiere.dataValues.libelle_Matiere
+                            -currentMatiere=matiere.dataValues.libelle_Matiere;
                     .dropdown-divider
-                    a.dropdown-item(href='#') + Ajouter une matière
+                    form.dropdown-header.form-inline(action="/home" method='post') 
+                            label(for="nom")   
+                            input(type="text" name='libelle' class="form-control" placeholder="Ajouter une matière") 
+
+                            button(type="submit" class="btn btn-info col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2") +
+
 
             li.nav-item
-                a.nav-link(id="ItemRevision" href='/revisions').disabled Révisions 
+                a.nav-link(id="ItemRevision" href='/matiere/#{currentMatiere}/revisions').disabled Révisions 
             li.nav-item
-                a.nav-link(id="ItemExamen" href='/examens').disabled Examens
+                a.nav-link(id="ItemExamen" href='/matiere/#{currentMatiere}/examens').disabled Examens
             li.nav-item
-                a.nav-link(id="ItemQuizz" href='/se_tester').disabled Se tester
+                a.nav-link(id="ItemQuizz" href='/matiere/#{currentMatiere}/se_tester').disabled Se tester
             li.nav-item
-                a.nav-link(id="ItemTodo" href='/a_faire').disabled A faire
+                a.nav-link(id="ItemTodo" href='/matiere/#{currentMatiere}/a_faire').disabled A faire
+        
+        a(href='' id="supprimer") Supprimer
+        input(type='button', class="navbar-right btn btn-link disabled ", value="Supprimer la matière")
+        
+        a(href='/disconnect' id="deconnexion")
+                        input(type='button', class="navbar-right btn btn-secondary", value="Se déconnecter")
             

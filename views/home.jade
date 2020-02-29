@@ -1,21 +1,26 @@
 //PAGE D'ACCUEIL UTILISATEUR
 
-doctype html
-html
-  meta(http-equiv="content-type")
-  head
-    meta(charset="utf-8")
-    title= title
-    link(rel='stylesheet', href='stylesheets/bootstrap.min.css')
-    link(rel='stylesheet', href='stylesheets/style.css')
+include layout.jade
+ 
+body(id="home-page")
+  header
+      include navbar.jade
 
+  .container-fluid
+      br
+      .container.bg-light.col-xs-12.col-sm-12.col-md-10.col-lg-10.col-xl-10
+          p(class="subtitle italic centerText") Examens à venir
+          p si il n'y a pas d'exam à venir (dans les 2/4 semaines ?)  
+          | afficher : Vous n'avez pas d'exam à venir
+          | sinon afficher les matieres+link qui en ont
+  br
+  .container-fluid
+      br
+      .container.bg-light.col-xs-12.col-sm-12.col-md-10.col-lg-10.col-xl-10
+          p(class="subtitle italic centerText") Choses à faire
+          p si il n'y a pas de choses à faire 
+          | afficher : Vous n'avez rien à faire.
+          | sinon afficher les matieres+link qui en ont
     
-  body(id="home-page")
-    header
-        include navbar.jade
-  
-
-
-      
-    footer
-      include footer.jade
+  footer
+    include footer.jade

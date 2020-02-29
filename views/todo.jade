@@ -1,15 +1,18 @@
+//Page A Faire
 
-doctype html
-html
-  head
-    meta(charset="utf-8")
-    title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    
-  body(id="home-page")
-    head
+include layout.jade
+ 
+body(id="home-page")
+  header
       include navbar.jade
+  
+  each item in itemsList
+    p #{item.dataValues.contenu} #{item.dataValues.done}
+  form.form-inline(action="/matiere/#{nomMatiere}/a_faire" method='post') 
+    label(for="nom")   
+    input(type="text" name='contenu' class="form-control" placeholder="Ajouter Item") 
 
-    footer
-      include footer.jade
+    button(type="submit" class="btn btn-info col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2") +
+
+  footer
+    include footer.jade

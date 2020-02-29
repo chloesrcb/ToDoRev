@@ -1,22 +1,15 @@
 //PAGE D'ACCUEIL DU SITE
 
-doctype html
-html
-  head
-    meta(charset="utf-8")
-    title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel="icon" href="/images/favicon.ico" type="image/x-icon")
-  body(id="index-page")
-      header
-        include first-navbar.jade
-      .container-fluid
-        img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="logo", class="center")
-        .container.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xl-8
-          p explications du site
-            |Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            |Voluptas ipsam maxime eius animi rem quisquam quae praesentium perspiciatis provident soluta repellendus, officiis nihil recusandae porro ratione architecto culpa suscipit totam?
-            //button(type="button" class="btn btn-info center") C'est parti !
-          a(href='/login' id="cestParti")
-            input(type='button', class="btn btn-info center", value="C'est parti !") 
+include layout.jade
+body(id="index-page")
+    header
+      include first-navbar.jade
+    .container-fluid
+      img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="logo", class="center")
+      .container.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xl-8
+        p explications du site
+          |Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          |Voluptas ipsam maxime eius animi rem quisquam quae praesentium perspiciatis provident soluta repellendus, officiis nihil recusandae porro ratione architecto culpa suscipit totam?
+
+        a(href='/login' id="cestParti")
+          input(type='button', class="btn btn-info center", value="C'est parti !") 

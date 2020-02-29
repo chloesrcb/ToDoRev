@@ -49,6 +49,23 @@ module.exports = {
         .catch(function(err){
             return res.status(500).json({ 'error': err});
         });
+    },
+
+    getMatiereId:function(nameMatiere,idUser,callback){
+        models.Matiere.findOne({
+            where: {id_User:idUser, libelle_Matiere:nameMatiere}
+        })
+        .then(function(matiereFound){
+            if(matiereFound){
+                callback(matiereFound.dataValues.id);
+            }
+            else{
+                callback(undefined);
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': err});
+        });
     }
 
 }
