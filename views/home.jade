@@ -13,32 +13,7 @@ html
   body(id="home-page")
     header
         include navbar.jade
-    //#menuMatiere.container 
-          .row
-            .col-md-4.mr-auto
-              .nav-item.dropdown.bg-light
-                .dropdown-header Matières
-                a.dropdown-item(href='#') Action
-                a.dropdown-item(href='#') Another action
-    //.container.col-md-5  
-      .list-group
-        button.list-group-item.list-group-item-action.centerText(type='button',  disabled='') Matières
-        button.list-group-item.list-group-item-action(type='button') Anglais
-        button.list-group-item.list-group-item-action(type='button') Maths
-        button.list-group-item.list-group-item-action(type='button') Vestibulum at eros
-  .container-fluid.h-45
-    .row.h-45
-      aside.col-12.col-xl-2.p-0.bg-light
-        nav.navbar.navbar-expand.navbar-light.bg-light.flex-md-column.flex-row.align-items-start
-          .collapse.navbar-collapse
-            ul.flex-md-column.flex-row.navbar-nav.w-100.justify-content-between
-              li.nav-item
-                p Matières
-              each matiere in matieresList
-                li.nav-item
-                  a.nav-link.pl-0(href='#')=matiere.dataValues.libelle_Matiere
-              li.nav-item
-                a.nav-link.pl-0(href='#') + Ajouter 
+  
 
 
       

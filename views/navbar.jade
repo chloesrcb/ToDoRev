@@ -1,4 +1,3 @@
-
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
     a.navbar-brand(href='/home') 
         img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="small-logo", class="d-inline-block align-top")
@@ -6,22 +5,31 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
         span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
         ul.navbar-nav.mr-auto 
-            li.nav-item(id="ItemNav")
-                a.nav-link(href='/revisions')
-                    | Révisions 
-                span.sr-only (current)
-            li.nav-item(id="ItemNav")
-                a.nav-link(href='/examens') Examens
-            li.nav-item(id="ItemNav")
-                a.nav-link(href='/se_tester') Se tester
-            li.nav-item(id="ItemNav")
-                a.nav-link(id="lastItemNav" href='/a_faire') A faire
+
             li.nav-item.dropdown(id="matiereItem")
-                a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-                    | Sélectionnez une matière
+                a.nav-link.dropdown-toggle(id='navbarDropdown', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Sélectionnez une matière
+                script(type='text/javascript').
+                    function change_dropdown(newText){
+                        document.getElementById("navbarDropdown").innerHTML=newText;
+                        document.getElementById("ItemRevision").setAttribute("class","nav-link");
+                        document.getElementById("ItemExamen").setAttribute("class","nav-link");
+                        document.getElementById("ItemQuizz").setAttribute("class","nav-link");
+                        document.getElementById("ItemTodo").setAttribute("class","nav-link");
+                    }
                 .dropdown-menu(aria-labelledby='navbarDropdown')
+                    
                     each matiere in matieresList
-                        a.dropdown-item(href='#')=matiere.dataValues.libelle_Matiere
-                    a.dropdown-item(href='#') Maths
+
+                        a.dropdown-item(onclick="change_dropdown('#{matiere.dataValues.libelle_Matiere}')")=matiere.dataValues.libelle_Matiere
                     .dropdown-divider
                     a.dropdown-item(href='#') + Ajouter une matière
+
+            li.nav-item
+                a.nav-link(id="ItemRevision" href='/revisions').disabled Révisions 
+            li.nav-item
+                a.nav-link(id="ItemExamen" href='/examens').disabled Examens
+            li.nav-item
+                a.nav-link(id="ItemQuizz" href='/se_tester').disabled Se tester
+            li.nav-item
+                a.nav-link(id="ItemTodo" href='/a_faire').disabled A faire
+            
