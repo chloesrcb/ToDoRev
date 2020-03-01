@@ -3,6 +3,18 @@ include layout.jade
 body(id="home-page")
   head
     include navbar.jade
+    
+  //liste des examens pour une matière
+  each item in itemsList
+    p #{item.dataValues.contenu} #{item.dataValues.done}
+
+  .container
+    form.my-5.form-inline.aligns-items-center(action="/matiere/#{nomMatiere}/a_faire" method='post') 
+      label(for="examen")   
+      input(type="text" name='contenu' class="form-control" placeholder="Nom de l'examen") 
+      label(for="date")   
+      input(type="text" name='contenu' class="form-control" placeholder="Date de l'examen")
+      button(type="submit" class="btn btn-info") +
 
   footer
     include footer.jade

@@ -13,7 +13,7 @@ module.exports = {
 
         models.Examen.findOne({
             where: {libExam: libelle,
-                dateExam=date,
+                dateExam:date,
                 id_Matiere:idMatiere }
         })
         .then(function(examFound){

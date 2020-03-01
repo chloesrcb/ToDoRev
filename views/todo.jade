@@ -6,13 +6,16 @@ body(id="home-page")
   header
       include navbar.jade
   
+  //liste des choses à faire
   each item in itemsList
     p #{item.dataValues.contenu} #{item.dataValues.done}
-  form.form-inline(action="/matiere/#{nomMatiere}/a_faire" method='post') 
-    label(for="nom")   
-    input(type="text" name='contenu' class="form-control" placeholder="Ajouter Item") 
 
-    button(type="submit" class="btn btn-info col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2") +
+  .container
+    form.form-inline(action="/matiere/#{nomMatiere}/a_faire" method='post') 
+      .form-group
+        label(for="ajout")   
+        input(type="text" name='contenu' class="form-control" placeholder="Ajouter une tâche") 
+        button(type="submit" class="btn btn-info") +
 
   footer
     include footer.jade

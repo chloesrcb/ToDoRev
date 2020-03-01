@@ -1,0 +1,14 @@
+//Page quand un quizz est lancé (affichage des questions)
+
+include layout.jade
+    
+body(id="home-page")
+  head
+    include navbar.jade
+
+  //liste des questions créées dans un test 
+  each item in itemsList
+    p #{item.dataValues.contenu} #{item.dataValues.done}
+  
+  footer
+    include footer.jade

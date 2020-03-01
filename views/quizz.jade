@@ -1,12 +1,17 @@
 //PAGE ME TESTER
 include layout.jade
     
-body
+body(id="home-page")
   head
     include navbar.jade
-  .container-fluide
-      button(type="button" class="btn btn-info") Me tester
-      button(type="button" class="btn btn-light") Editer test(s)
+
+  //liste des tests créés dans une matière 
+  each item in itemsList
+    p #{item.dataValues.contenu} #{item.dataValues.done}
+
+  .container.my-5
+      button(type="button" class="btn btn-info col-md-4 offset-md-1") Me tester
+      button(type="button" class="btn btn-secondary col-md-4 offset-md-1") Editer test(s)
   
   footer
     include footer.jade

@@ -9,7 +9,8 @@ module.exports = {
         if(libelle==undefined){
             return res.status(400).json({'error': 'missing parameters'});
         }
-
+        
+        
         models.Quizz.findOne({
             where: {libQuizz: libelle, id_Matiere:idMatiere }
         })
@@ -35,16 +36,17 @@ module.exports = {
         });
     },
 
-    getQuizzs:function(req, res,idMatiere,callback){
+    getQuizz:function(req, res,idMatiere,callback){
+        console.log('on cherche un quizz');
         models.Quizz.findAll({
             where: {id_Matiere:idMatiere}
         })
-        .then(function(quizzsFound){
-            if(quizzsFound){
-                callback( quizzsFound);
+        .then(function(quizzFound){
+            if(quizzFound){
+                callback( quizzFound);
             }
             else{
-                return res.status(409).json({ 'error': 'No Quizzs'});
+                return res.status(409).json({ 'error': 'No Quizz'});
             }
         })
         .catch(function(err){
