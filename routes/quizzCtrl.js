@@ -19,7 +19,7 @@ module.exports = {
                 var newQuizz = models.Quizz.create({
                     libQuizz: libelle,
                     id_Matiere:idMatiere,
-                    MatiereId:id
+                    MatiereId:idMatiere
                 })
                 .then(function(newQuizz){
                     res.status(200)

@@ -44,7 +44,7 @@ router.get('/', function(req, res, next) {
   
 });
 
-/*
+
 router.post('/', function(req, res, next) {
   console.log("Salut")
   var token =req.cookies.token;
@@ -66,10 +66,10 @@ router.post('/', function(req, res, next) {
         var q = url.parse(req.baseUrl, true);
         var matiereName=q.pathname.split('/')[2]; 
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
-          quizz.addQuizz(req,res,matiereId);
+          quizzCtrl.addQuizz(req,res,matiereId);
         })
       }
     }
-});*/
+});
 
 module.exports = router;

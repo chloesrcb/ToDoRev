@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
           examCtrl.getExams(req,res,matiereId,function(itemsList){
             matiereCtrl.getMatieres(req,res,userId,function(matieresList){
               //console.log(matieresList)
-                res.render('exam', { title: 'A faire',nomMatiere:matiereName, itemsList:itemsList, matieresList:matieresList });
+                res.render('exam', { title: 'Examens',nomMatiere:matiereName, itemsList:itemsList, matieresList:matieresList });
 
             })
           })
@@ -44,7 +44,7 @@ router.get('/', function(req, res, next) {
   
 });
 
-/*
+
 router.post('/', function(req, res, next) {
   console.log("Salut")
   var token =req.cookies.token;
@@ -70,5 +70,5 @@ router.post('/', function(req, res, next) {
         })
       }
     }
-});*/
+});
 module.exports = router;

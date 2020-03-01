@@ -5,7 +5,7 @@ module.exports = {
     addCase: function(req, res,idLigne,idColonne){
         models.CaseTab.findOne({
             where: {libExam: libelle,
-                id_Colonne=idColonne,
+                id_Colonne:idColonne,
                 id_Ligne:idLigne }
         })
         .then(function(caseFound){
@@ -32,13 +32,13 @@ module.exports = {
         });
     },
 
-    getCases:function(req, res,idLigne,callback){
+    getCases:function(req, res,idLigne,tab,callback){
         models.CaseTab.findAll({
             where: {id_Ligne:idLigne}
         })
         .then(function(casesFound){
             if(casesFound){
-                callback(casesFound);
+                callback(tab,casesFound);
             }
             else{
                 return res.status(409).json({ 'error': 'No Cases'});

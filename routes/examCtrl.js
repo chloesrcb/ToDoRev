@@ -12,17 +12,19 @@ module.exports = {
         }
 
         models.Examen.findOne({
-            where: {libExam: libelle,
+            where: {libExamen: libelle,
                 dateExam:date,
                 id_Matiere:idMatiere }
         })
         .then(function(examFound){
+            console.log("Il y a un res")
             if(!examFound){
+                console.log("On tente de creer")
                 var newExam = models.Examen.create({
                     libExamen: libelle,
                     dateExam: date,
                     id_Matiere:idMatiere,
-                    MatiereId:id
+                    MatiereId:idMatiere
                 })
                 .then(function(newExam){
                     res.status(200)

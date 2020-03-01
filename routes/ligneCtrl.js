@@ -38,7 +38,7 @@ module.exports = {
         });
     },
 
-    getExams:function(req, res,idMatiere,callback){
+    getLignes:function(req, res,idMatiere,callback){
         models.Ligne.findAll({
             where: {id_Matiere:idMatiere}
         })

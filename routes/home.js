@@ -22,7 +22,6 @@ router.get('/', function(req, res, next) {
     }
     else{
       matiereCtrl.getMatieres(req,res,userId,function(matieresList){
-        console.log(matieresList)
         userCtrl.getClient(userId,req,res,function(user){
           //if(user===undefined)return;
           res.render('home', { title: 'Home',userId: user,matieresList:matieresList });
