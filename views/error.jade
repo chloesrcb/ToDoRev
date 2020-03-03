@@ -1,5 +1,12 @@
-extends layout
+//page d'erreur
+include layout
 
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+body(id="home-page")
+  header
+    include first-navbar.jade
+  br
+  .container.bg-light.col-10.col-sm-9.col-md-8.col-lg-7.col-xl-5
+    pre.centerText.statusErreur.bold Erreur #{error.status}
+    .centerText.msgErreur= message
+    pre.centerText #{error.stack}
+    br

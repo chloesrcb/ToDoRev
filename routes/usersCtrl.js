@@ -1,20 +1,45 @@
+//Imports
 var bcrypt  = require('bcrypt');
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
 
+//Constantes
+const EMAIL_REJEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const PASSWORD_REJEX=/(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/;
+
 module.exports = {
     register: function(req, res){
-        //Params
+        //Paramètres
         var email = req.body.email;
         var password = req.body.password;
         var nom = req.body.nom;
         var prenom = req.body.prenom;
-        
+        console.log(email)
+        //Si il manque une entrée
         if(email==null || password==null || nom==null || prenom==null){
             return res.status(400).json({'error': 'missing parameters'});
         }
 
+        //Si la longueur du nom ou du prénom de convient pas
+        if(nom.length<2 || nom.length>=20 || prenom.length<2 || prenom.length>=20){
+            res.status(400);
+            error={status:400, stack:'stack'}
+            return res.render('error',{message: 'invalid name and/or firstname'});
+        }
+        
+        //Email invalid
+        
+        if(!EMAIL_REJEX.test(email)){
+            return res.status(400).json({'error': 'invalid email'});
+        }
+
+        //Mot de passe invalide, doit contenir 1 maj, 1 min, 1 nombre, 1 caractère spécial et doit avoir une longueur entre 6 et 10
+        if(!PASSWORD_REJEX.test(password)){
+            return res.status(400).json({'error': 'invalid password'});
+        }
+
         models.User.findOne({
+            attributes: ["email"],
             where: {email: email}
         })
         .then(function(userFound){

@@ -7,16 +7,17 @@ body(id="home-page")
     include navbar.jade
 
   .container-fluid
-        p(class="subtitle italic centerText") Editer quizz
+        p.subtitle.italic.centerText Editer quizz
         .container.col-xs-12.col-sm-12.col-md-5.col-lg-5.col-xl-5.bg-light
-            form(method='post')
+            //Formulaire Question-Réponse
+            form(method="post")
                 .form-group
                     label(for="Q1")   
-                    input(type="text" name='Q1' class="form-control" placeholder="Question") 
+                    input(type="text" name="Q1" class="form-control" placeholder="Question") 
                 
                 .form-group
                     label(for="R1")
-                    input(type="text" name='R1' class="form-control" placeholder="Réponse")
+                    input(type="text" name="R1" class="form-control" placeholder="Réponse")
                 
                 //mettre Q1 et R1 par défaut (1 question) puis avec un + recréer ce formulaire pour chaque ajout
                 //d'une question (essayer de changer nom R2,R3 pour récupérer les questions)

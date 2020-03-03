@@ -1,18 +1,25 @@
+//PAGE "A FAIRE"
+
 include layout.jade
  
 body(id="home-page")
   header
       include navbar.jade
   
-  //liste des choses à faire
-  each item in itemsList
-    p #{item.dataValues.contenu} #{item.dataValues.done}
+  .container.bg-light.margeTop
+    p.centerText.subtitle.italic.bold To-Do-List
+    -if (itemList==undefined)
+      p.centerText.big Vous n'avez rien à faire.
+    -else 
+      //liste des choses à faire
+      each item in itemsList
+        p #{item.dataValues.contenu} #{item.dataValues.done}
 
-  .container
-    form.form-inline(action="/matiere/#{nomMatiere}/a_faire" method='post') 
+    //Formulaire d'ajout d'un item à la to-do-liste
+    form.form-inline(action="/matiere/#{nomMatiere}/a_faire" method="post") 
       .form-group
         label(for="ajout")   
-        input(type="text" name='contenu' class="form-control" placeholder="Ajouter une tâche") 
+        input(type="text" name="contenu" class="form-control" placeholder="Ajouter une tâche") 
         button(type="submit" class="btn btn-info") +
 
   footer

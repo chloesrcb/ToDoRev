@@ -9,13 +9,13 @@
 
 /*Taille du texte*/
 .small {
-	font-size: .8571em; /* equiv 12px */
-	line-height: 1.75em;
+	font-size: 1em; /* equiv 12px */
+	line-height: 1em;
 }
 
 .big {
-  font-size: 2em; 
-	line-height: 2em;
+  font-size: 1.5em; 
+	line-height: 1.5em;
 }
 
 /*partie de texte*/
@@ -26,6 +26,7 @@
 }
 
 .subtitle{
+    color: rgb(18, 165, 175);
     font-size: 2em;
     line-height: 1.5em;
 }
@@ -47,7 +48,10 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
 
+.margeTop{
+  margin-top:2em;
 }
 
 /*Arrière plan*/
@@ -64,23 +68,23 @@ body, html {
   background-size: cover;
 }
 
-#home-page {
+#home-page, #index-page {
   background-image: url("../images/texture-turquoise-watercolor.jpg");
   display:block;
   max-width:100%;
   height: auto;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: cover;
 }
 
-#index-page {
+/*#index-page {
   background-image: url("../images/texture-turquoise-watercolor.jpg");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
+}*/
 
 /*logo ToDoRev taille*/
 #logo{
@@ -110,4 +114,17 @@ body, html {
   text-decoration: none;
 }
 
+/*Erreurs*/
+
+.statusErreur{
+  color: rgb(18, 165, 175);
+  margin-top: 0.3em;
+  font-size: 3em; 
+}
+
+.msgErreur{
+  color: rgb(58, 69, 70);
+  margin-top: 0;
+  font-size: 2em; 
+}
 

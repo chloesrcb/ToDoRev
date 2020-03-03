@@ -1,31 +1,36 @@
+//Page d'inscription
 include layout.jade
 
 body(id="register-page")
     header
         include first-navbar.jade
+
     .container-fluid
-        p(class="title centerText") INSCRIPTION
+        p.title.centerText INSCRIPTION
+
         .container.col-xs-12.col-sm-12.col-md-5.col-lg-5.col-xl-5.bg-light
-            form(class="login" method='post')
+            //Formulaire d'inscription
+            form(class="login" method="post")
                 .form-group
                     label(for="nom")   
-                    input(type="text" name='nom' class="form-control" placeholder="Nom") 
+                    input(type="text" name="nom" class="form-control" placeholder="Nom") 
                 
                 .form-group
                     label(for="prenom")
-                    input(type="text" name='prenom' class="form-control" placeholder="Prénom")
+                    input(type="text" name="prenom" class="form-control" placeholder="Prénom")
                     
                 .form-group
                     label(for="email") 
-                    input(type="text" name='email' class="form-control" placeholder="Adresse mail")
+                    input(type="text" name="email" class="form-control" placeholder="Adresse mail")
 
                 .form-group
                     label(for="password")
-                    input(type="password" name='password' class="form-control" placeholder="Mot de passe")
+                    input(type="password" name="password" class="form-control" placeholder="Mot de passe")
+                    p *Le mot de passe doit contenir 6 à 10 caractères dont 1 majuscule, 1 minuscule, 1 caractère spécial et 1 nombre.
                     br
 
                     a(href='/' id="retour")
-                        input(type='button', class="btn btn-light col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4", value="Retour") 
+                        input(type="button", class="btn btn-light col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4", value="Retour") 
                     
                     button(type="submit" class="btn btn-info col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4") Valider
     footer

@@ -3,21 +3,23 @@ include layout.jade
 body(id="home-page")
   head
     include navbar.jade
-    
-  .container-fluid
-    p(class="subtitle italic centerText") Vos examens
-    .container.bg-light.col-12.col-sm-712.col-md-10.col-lg-8.col-xl-8
+  
+  .container.bg-light.margeTop
+    p.centerText.subtitle.italic.bold Mes examens
+    -if (itemList==undefined)
+      p.centerText.big Vous n'avez pas encore d'examen prévu.
+    -else 
       //liste des examens pour une matière
       each item in itemsList
         li #{item.dataValues.libExamen} pour le #{item.dataValues.dateExam}
         
-        
-      form.my-5.form-inline.aligns-items-center(action="/matiere/#{nomMatiere}/examens" method='post') 
-        label(for="examen")   
-        input(type="text" name='libelle' class="form-control" placeholder="Nom de l'examen") 
-        label(for="date")   
-        input(type="datetime-local" name='date' class="form-control" placeholder="Date de l'examen")
-        button(type="submit" class="btn btn-info") +
+    //Formulaire pour l'ajout d'un examen
+    form.my-5.form-inline.aligns-items-center(action="/matiere/#{nomMatiere}/examens" method="post") 
+      label(for="examen") Ajoutez un examen   
+      input(type="text" name='libelle' class="form-control" placeholder="Nom de l'examen") 
+      label(for="date")   
+      input(type="datetime-local" name='date' class="form-control" placeholder="Date de l'examen")
+      button(type="submit" class="btn btn-info") +
 
   footer
     include footer.jade

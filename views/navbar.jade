@@ -1,3 +1,5 @@
+//Barre de navigation après connexion
+
 -var currentMatiere=undefined;
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
     a.navbar-brand(href='/home') 
@@ -9,7 +11,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
 
             li.nav-item.dropdown(id="matiereItem")
                 a.nav-link.dropdown-toggle(id='navbarDropdown', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Sélectionnez une matière
-                script(type='text/javascript').
+                script(type="text/javascript").
                     function change_dropdown(newText){
                         document.getElementById("navbarDropdown").innerHTML=newText;
                         currentMatiere=newText;
@@ -25,16 +27,16 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
                         document.getElementById("ItemTodo").setAttribute("href","/matiere/"+currentMatiere+"/a_faire");
                     }
                 .dropdown-menu(aria-labelledby='navbarDropdown')
-                    
+                    //liste des matières (dans le dropdown)
                     each matiere in matieresList
 
                         a.dropdown-item(onclick="change_dropdown('#{matiere.dataValues.libelle_Matiere}')")=matiere.dataValues.libelle_Matiere
                             -currentMatiere=matiere.dataValues.libelle_Matiere;
                     .dropdown-divider
+                    //Formulaire d'ajout d'une matière (dans le dropdown)
                     form.dropdown-header.form-inline(action="/home" method='post') 
                             label(for="nom")   
                             input(type="text" name='libelle' class="form-control" placeholder="Ajouter une matière") 
-
                             button(type="submit" class="btn btn-info col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2") +
 
 
@@ -47,7 +49,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
             li.nav-item
                 a.nav-link(id="ItemTodo" href='/matiere/#{currentMatiere}/a_faire').disabled A faire
         
-        a(href='' id="supprimer") Supprimer
+        //a(href='' id="supprimer") Supprimer
         input(type='button', class="navbar-right btn btn-link disabled ", value="Supprimer la matière")
         
         a(href='/disconnect' id="deconnexion")
