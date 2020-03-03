@@ -2,10 +2,10 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
     a.navbar-brand(href='/home') 
         img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="small-logo", class="d-inline-block align-top")
-    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
-    #navbarSupportedContent.collapse.navbar-collapse
-        ul.navbar-nav.mr-auto 
+    #navbarResponsive.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
 
             li.nav-item.dropdown(id="matiereItem")
                 a.nav-link.dropdown-toggle(id='navbarDropdown', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Sélectionnez une matière
@@ -52,4 +52,3 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
         
         a(href='/disconnect' id="deconnexion")
                         input(type='button', class="navbar-right btn btn-secondary", value="Se déconnecter")
-            

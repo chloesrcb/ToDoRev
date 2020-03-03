@@ -8,6 +8,7 @@ var ligneCtrl = require('./ligneCtrl');
 var colonneCtrl = require('./colonneCtrl');
 var caseCtrl = require('./caseCtrl');
 const events = require('events');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var token =req.cookies.token;
@@ -39,7 +40,7 @@ router.get('/', function(req, res, next) {
               eventEmitter.on("caseCatch",function(req,res,userId,matiereName,ligneList,ensembleCase,colonneList){
                 
                 matiereCtrl.getMatieres(req,res,userId,function(matieresList){
-                  console.log(matieresList)
+                  console.log(ensembleCase)
                   console.log("matiere get")
                   return res.render('revisions', { title: 'Révision',nomMatiere:matiereName, colonneList:colonneList, ligneList:ligneList , caseList:ensembleCase, matieresList:matieresList });
     
@@ -67,6 +68,69 @@ router.get('/', function(req, res, next) {
       }
 
   
+});
+
+
+router.post('/newColonne', function(req, res, next) {
+  console.log("Salut")
+  var token =req.cookies.token;
+  if(token === undefined){ 
+      console.log("pas de token");
+      res.status(401);
+      res.redirect("/login");
+  }
+  else{
+      console.log("Il y a un token")
+      userId=jwtUtils.verify(token);
+      console.log("On a le resultat");
+      if(userId===undefined){
+          console.log("token invalide");
+          res.status(401);
+          res.redirect("/login");
+      }
+      else{
+
+
+        var q = url.parse(req.baseUrl, true);
+        var matiereName=q.pathname.split('/')[2]; 
+        matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
+          colonneCtrl.addColonne(req,res,matiereId,0)
+        })
+
+
+      }
+    }
+});
+
+router.post('/newLigne', function(req, res, next) {
+  console.log("Salut Ligne")
+  var token =req.cookies.token;
+  if(token === undefined){ 
+      console.log("pas de token");
+      res.status(401);
+      res.redirect("/login");
+  }
+  else{
+      console.log("Il y a un token")
+      userId=jwtUtils.verify(token);
+      console.log("On a le resultat");
+      if(userId===undefined){
+          console.log("token invalide");
+          res.status(401);
+          res.redirect("/login");
+      }
+      else{
+
+
+        var q = url.parse(req.baseUrl, true);
+        var matiereName=q.pathname.split('/')[2]; 
+        matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
+          ligneCtrl.addLigne(req,res,matiereId,0)
+        })
+
+
+      }
+    }
 });
 
 var pushTab=function(tab,caseList){

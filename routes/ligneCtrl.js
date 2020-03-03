@@ -1,5 +1,7 @@
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
+var colonneCtrl = require('./colonneCtrl');
+var caseCtrl = require('./caseCtrl');
 
 module.exports = {
     addLigne: function(req, res,idMatiere,numLigne){
@@ -21,11 +23,18 @@ module.exports = {
                     libLigne: libelle,
                     numLigne:numLigne,
                     id_Matiere:idMatiere,
-                    MatiereId:id
+                    MatiereId:idMatiere
                 })
                 .then(function(newLigne){
-                    res.status(200)
-                    return res.redirect("/home");
+                    var idLigne=newLigne.id;
+                    colonneCtrl.getColonnes(req,res,matiereId,function(colonneList){
+                        for(var i=0;i<colonneList.length;i++){
+                            caseCtrl.addCase(req,res,idLigne,colonneList[i].dataValues.id);
+                        }
+
+                        res.status(200)
+                        return res.redirect("/home");
+                    });
                 })
                 .catch(function(err){
                     return res.status(500).json({'error':err});

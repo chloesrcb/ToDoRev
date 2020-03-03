@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
             return res.status(401).json({err: 'Matiere non trouvée'});
           examCtrl.getExams(req,res,matiereId,function(itemsList){
             matiereCtrl.getMatieres(req,res,userId,function(matieresList){
-              //console.log(matieresList)
+              console.log(itemsList)
                 res.render('exam', { title: 'Examens',nomMatiere:matiereName, itemsList:itemsList, matieresList:matieresList });
 
             })

@@ -1,5 +1,7 @@
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
+var ligneCtrl = require('./ligneCtrl');
+var caseCtrl = require('./caseCtrl');
 
 module.exports = {
     addColonne: function(req, res,idMatiere,numColonne){
@@ -11,21 +13,28 @@ module.exports = {
         }
 
         models.Colonne.findOne({
-            where: {libColonne: libelle,
+            where: {LibColonne: libelle,
                 numColonne:numColonne,
                 id_Matiere:idMatiere }
         })
         .then(function(colonneFound){
             if(!colonneFound){
                 var newColonne = models.Colonne.create({
-                    libColonne: libelle,
+                    LibColonne: libelle,
                     numColonne:numColonne,
                     id_Matiere:idMatiere,
-                    MatiereId:id
+                    MatiereId:idMatiere
                 })
                 .then(function(newColonne){
-                    res.status(200)
-                    return res.redirect("/home");
+                    var idColonne=newColonne.id;
+                    ligneCtrl.getLignes(req,res,matiereId,function(ligneList){
+                        for(var i=0;i<ligneList.length;i++){
+                            caseCtrl.addCase(req,res,ligneList[i].dataValues.id,idColonne);
+                        }
+
+                        res.status(200)
+                        return res.redirect("/home");
+                    });
                 })
                 .catch(function(err){
                     return res.status(500).json({'error':err});
