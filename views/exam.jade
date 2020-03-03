@@ -6,12 +6,12 @@ body(id="home-page")
   
   .container.bg-light.margeTop
     p.centerText.subtitle.italic.bold Mes examens
-    -if (itemList==undefined)
+    -if (itemsList==undefined)
       p.centerText.big Vous n'avez pas encore d'examen prévu.
     -else 
       //liste des examens pour une matière
       each item in itemsList
-        li #{item.dataValues.libExamen} pour le #{item.dataValues.dateExam}
+        li #{item.dataValues.libExamen} pour le #{item.dataValues.dateExam.getDate()}/#{item.dataValues.dateExam.getMonth()}/#{item.dataValues.dateExam.getFullYear()} à #{item.dataValues.dateExam.getHours()} : #{item.dataValues.dateExam.getMinutes()}
         
     //Formulaire pour l'ajout d'un examen
     form.my-5.form-inline.aligns-items-center(action="/matiere/#{nomMatiere}/examens" method="post") 
