@@ -1,19 +1,20 @@
 //barre de navigation avant connexion 
 
-nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    a.navbar-brand(href='/') 
-        img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="small-logo", class="d-inline-block align-top")
-    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
-        span.navbar-toggler-icon
-    #navbarResponsive.collapse.navbar-collapse
-        ul.navbar-nav
-            li.nav-item(id="ItemNav")
-                a.nav-link(href="/login")
-                    | Connexion 
-                //span.sr-only (current)
-            li.nav-item(id="ItemNav")
-                a.nav-link(href="/inscription") 
-                    | Inscription
-            li.nav-item(id="ItemNav")
-                a.nav-link(href='#') 
-                    | A propos
+nav.navbar.navbar-expand-md.navbar-light.bg-light.navigation-clean
+    .container-fluid
+        a.navbar-brand(href='/') 
+            img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="small-logo", class="d-inline-block align-top")
+        button.navbar-toggler( data-toggle='collapse', data-target='#navcol-1', class="navbar-toggler")
+            span.sr-only Toggle navigation
+            span.navbar-toggler-icon
+        #navcol-1.collapse.navbar-collapse
+            ul.nav.navbar-nav.ml-auto
+                li.nav-item(id="ItemNav", role="presentation")
+                    a.nav-link(href="/login")
+                        | Connexion  
+                li.nav-item(id="ItemNav", role="presentation")
+                    a.nav-link(href="/inscription") 
+                        | Inscription
+                li.nav-item(id="ItemNav", role="presentation")
+                    a.nav-link(href='#') 
+                        | A propos
