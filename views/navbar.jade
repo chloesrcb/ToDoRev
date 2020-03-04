@@ -1,7 +1,7 @@
 //Barre de navigation après connexion
 
 -var currentMatiere=undefined;
-nav.navbar.navbar-expand-lg.navbar-light.bg-light
+nav.navbar.navbar-expand-md.navbar-light.bg-light
     a.navbar-brand(href='/home') 
         img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="small-logo", class="d-inline-block align-top")
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
@@ -49,8 +49,9 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
             li.nav-item
                 a.nav-link(id="ItemTodo" href='/matiere/#{currentMatiere}/a_faire').disabled A faire
         
-        //a(href='' id="supprimer") Supprimer
-        input(type='button', class="navbar-right btn btn-link disabled ", value="Supprimer la matière")
+
+        a(href='/remove' id="supprimerMatiere")
+            input(type='button', class="navbar-right btn btn-link disabled ", value="Supprimer la matière")
         
         a(href='/disconnect' id="deconnexion")
-                        input(type='button', class="navbar-right btn btn-secondary", value="Se déconnecter")
+            input(type='button', class="navbar-right btn btn-secondary", value="Se déconnecter")
