@@ -1,11 +1,10 @@
 //barre de navigation avant connexion 
 
-nav.navbar.navbar-expand-md.navbar-light.bg-light.navigation-clean
+nav.navbar.navbar-expand-md.navbar-light.bg-light
     .container-fluid
         a.navbar-brand(href='/') 
             img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="small-logo", class="d-inline-block align-top")
-        button.navbar-toggler( data-toggle='collapse', data-target='#navcol-1', class="navbar-toggler")
-            span.sr-only Toggle navigation
+        button.navbar-toggler( data-toggle='collapse', data-target='#navcol-1', class="navbar-toggler" aria-expanded="false")
             span.navbar-toggler-icon
         #navcol-1.collapse.navbar-collapse
             ul.nav.navbar-nav.ml-auto

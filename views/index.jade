@@ -1,19 +1,42 @@
 //PAGE D'ACCUEIL DU SITE
 
 include layout.jade
-body(id="index-page")
+body.bg-light
+
     header
       include first-navbar.jade
-    .container-fluid
+    
+    .masthead.text-black.text-center(id="index-page")
+      .overlay
+      .container
+        .row
+          .col-xl-9.mx-auto
+            //Logo
+            img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="logo", class="center")
+            p.big Organisez vos révisions et soyez plus productif...
+          .col-md-10.col-lg-8.col-xl-7.mx-auto.mb-5
+            //Bouton menant à la connexion
+            a(href="/login" id="cestParti")
+              input(type="button", class="btn btn-info center", value="C'est parti !") 
+  
+    section.features-icons.bg-light.text-center
+      .container.mt-5 
+        .row
+          .col-lg-4
+            .mx-auto.features-icons-item.mb-5.mb-lg-0.mb-lg-3
+              img(src="/images/pencil.png", alt="Crayon", id="logoAccueil" class="center")
+              p Examens et To-Do-List 
+              p.lead.mb-0 Vous pourrez noter vos examens et les choses que vous avez à faire pour les réviser. 
+          .col-lg-4
+            .mx-auto.features-icons-item.mb-5.mb-lg-0.mb-lg-3
+              img(src="/images/student.png", alt="Diplome", id="logoAccueil" class="center")
+              p Grille de révisions
+              p.lead.mb-0 Vous pourrez savoir où vous en êtes dans vos révisions grâce à une grille personnalisée de ce type :
+              img(src="/images/grilleDessin.png", alt="Grille", id="logoAccueil" class="center")
+          .col-lg-4
+            .mx-auto.features-icons-item.mb-5.mb-lg-0.mb-lg-3
+              img(src="/images/list2.png", alt="List", id="logoAccueil" class="center")
+              p Testez-vous
+              p.lead.mb-0 Vous pourrez créer plusieurs tests par matière afin de tester vos connaissances.
 
-      //Logo
-      img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="logo", class="center")
-
-      .container.col-xs-8.col-sm-8.col-md-8.col-lg-8.col-xl-8
-        p explications du site
-          |Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-          |Voluptas ipsam maxime eius animi rem quisquam quae praesentium perspiciatis provident soluta repellendus, officiis nihil recusandae porro ratione architecto culpa suscipit totam?
-
-        //Bouton menant à la connexion
-        a(href="/login" id="cestParti")
-          input(type="button", class="btn btn-info center", value="C'est parti !") 
+        

@@ -26,10 +26,9 @@ body(id="register-page")
                 .form-group
                     label(for="password")
                     input(type="password" name="password" class="form-control" placeholder="Mot de passe")
-                    p *Le mot de passe doit contenir 6 à 10 caractères dont 1 majuscule, 1 minuscule, 1 caractère spécial et 1 nombre.
-                    br
+                    p.italic *Le mot de passe doit contenir 6 à 10 caractères dont 1 majuscule, 1 minuscule, 1 caractère spécial et 1 nombre.
 
-                    a(href='/' id="retour")
+                    a(href='/' id="retour").mt-3
                         input(type="button", class="btn btn-light col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4", value="Retour") 
                     
                     button(type="submit" class="btn btn-info col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4") Valider

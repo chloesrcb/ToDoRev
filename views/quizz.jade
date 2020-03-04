@@ -5,10 +5,10 @@ body(id="home-page")
   head
     include navbar.jade
 
-  .container.bg-light.margeTop
+  .container.bg-light.mt-5
     p.centerText.subtitle.italic.bold Vos tests
     -if (itemList==undefined)
-      p.centerText.big Vous n'avez rien pas encore créer de test.
+      p.centerText.big Vous n'avez rien pas encore créé de test.
     -else 
       //liste des tests créés dans une matière avec bouton me tester et éditer pour chacun
       each item in itemsList
@@ -17,11 +17,11 @@ body(id="home-page")
           button(type="button" class="btn btn-info col-md-4 offset-md-1") Me tester
           button(type="button" class="btn btn-secondary col-md-4 offset-md-1") Editer
 
-    form.form-inline(action="/matiere/#{nomMatiere}/se_tester" method="post") 
-      .form-group
+    form.mt-5.form-inline(action="/matiere/#{nomMatiere}/se_tester" method="post") 
+      .form-group.mx-auto
         label(for="ajout")   
-        input(type="text" name='libelle' class="form-control" placeholder="Nouveau Test") 
-        button(type="submit" class="btn btn-info") +
+        input(type="text" name='libelle' class="form-control" placeholder="Nouveau Test").mb-5 
+        button(type="submit" class="btn btn-info").mb-5 +
   
   footer
     include footer.jade
