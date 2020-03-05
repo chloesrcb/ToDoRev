@@ -4,8 +4,7 @@ var models  = require('../models');
 module.exports = {
     addCase: function(req, res,idLigne,idColonne){
         models.CaseTab.findOne({
-            where: {libExam: libelle,
-                id_Colonne:idColonne,
+            where: {id_Colonne:idColonne,
                 id_Ligne:idLigne }
         })
         .then(function(caseFound){
@@ -18,20 +17,19 @@ module.exports = {
                     LigneId:idLigne
                 })
                 .then(function(newCase){
-                    res.status(200)
-                    return res.redirect("/home");
+                    /*res.status(200)
+                    return res.redirect("/home");*/
                 })
                 .catch(function(err){
-                    return res.status(500).json({'error':err});
+                    return res.status(500).json({'error':'erreur creation case'});
                 });
             }else{
                 return res.status(409).json({ 'error': 'Case already exists'});
             }
         }).catch(function(err){
-            return res.status(500).json({'error': err});
+            return res.status(500).json({'error': 'erreur detection de la case'});
         });
     },
-
     getCases:function(req, res,idLigne,tab,callback){
         models.CaseTab.findAll({
             where: {id_Ligne:idLigne}

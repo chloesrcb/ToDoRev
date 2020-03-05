@@ -10,7 +10,12 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light
         ul.navbar-nav.mr-auto
 
             li.nav-item.dropdown(id="matiereItem")
-                a.nav-link.dropdown-toggle(id='navbarDropdown', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Sélectionnez une matière
+                -if(nomMatiere==undefined)
+                    a.nav-link.dropdown-toggle(id='navbarDropdown', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Sélectionnez une matière
+                -else{
+                    a.nav-link.dropdown-toggle(id='navbarDropdown', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') #{nomMatiere}
+                -currentMatiere=nomMatiere;
+                -}
                 script(type="text/javascript").
                     function change_dropdown(newText){
                         document.getElementById("navbarDropdown").innerHTML=newText;
@@ -19,19 +24,20 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light
                         document.getElementById("ItemExamen").setAttribute("class","nav-link");
                         document.getElementById("ItemQuizz").setAttribute("class","nav-link");
                         document.getElementById("ItemTodo").setAttribute("class","nav-link");
+                        //document.getElementById("deleteMatiere").setAttribute("class","nav-link");
 
                         
                         document.getElementById("ItemRevision").setAttribute("href","/matiere/"+currentMatiere+"/revisions");
                         document.getElementById("ItemExamen").setAttribute("href","/matiere/"+currentMatiere+"/examens");
                         document.getElementById("ItemQuizz").setAttribute("href","/matiere/"+currentMatiere+"/se_tester");
                         document.getElementById("ItemTodo").setAttribute("href","/matiere/"+currentMatiere+"/a_faire");
+                        document.getElementById("deleteMatiere").setAttribute("href","delete/matiere/"+currentMatiere);
                     }
                 .dropdown-menu(aria-labelledby='navbarDropdown')
                     //liste des matières (dans le dropdown)
                     each matiere in matieresList
 
                         a.dropdown-item(onclick="change_dropdown('#{matiere.dataValues.libelle_Matiere}')")=matiere.dataValues.libelle_Matiere
-                            -currentMatiere=matiere.dataValues.libelle_Matiere;
                     .dropdown-divider
                     //Formulaire d'ajout d'une matière (dans le dropdown)
                     form.dropdown-header.form-inline(action="/home" method='post') 
@@ -41,17 +47,45 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light
 
 
             li.nav-item
-                a.nav-link(id="ItemRevision" href='/matiere/#{currentMatiere}/revisions').disabled Révisions 
-            li.nav-item
-                a.nav-link(id="ItemExamen" href='/matiere/#{currentMatiere}/examens').disabled Examens
-            li.nav-item
-                a.nav-link(id="ItemQuizz" href='/matiere/#{currentMatiere}/se_tester').disabled Se tester
-            li.nav-item
-                a.nav-link(id="ItemTodo" href='/matiere/#{currentMatiere}/a_faire').disabled A faire
-        
+                -if(nomMatiere==undefined)
+                    a.nav-link(id="ItemRevision" href='/matiere/#{currentMatiere}/revisions').disabled Révisions 
+                -else
+                    a.nav-link(id="ItemRevision" href='/matiere/#{currentMatiere}/revisions') Révisions 
 
-        a(href='/remove' id="supprimerMatiere")
-            input(type='button', class="navbar-right btn btn-link disabled ", value="Supprimer la matière")
+            li.nav-item
+                -if(nomMatiere==undefined)
+                    a.nav-link(id="ItemExamen" href='/matiere/#{currentMatiere}/examens').disabled Examens
+                -else
+                    a.nav-link(id="ItemExamen" href='/matiere/#{currentMatiere}/examens') Examens
+                
+            li.nav-item
+                -if(nomMatiere==undefined)
+                    a.nav-link(id="ItemQuizz" href='/matiere/#{currentMatiere}/se_tester').disabled Se tester
+                -else
+                    a.nav-link(id="ItemQuizz" href='/matiere/#{currentMatiere}/se_tester') Se tester
+
+            li.nav-item
+                -if(nomMatiere==undefined)
+                    a.nav-link(id="ItemTodo" href='/matiere/#{currentMatiere}/a_faire').disabled A faire
+                -else
+                    a.nav-link(id="ItemTodo" href='/matiere/#{currentMatiere}/a_faire') A faire
+        
+        form(method='delete' action="/delete")
+            input(type='submit', class="navbar-right btn btn-link", value="Supprimer la matière")
+
+
+        script(type="text/javascript").
+            function sendDelete(event,nomMatiere){
+                $.ajax({
+                url: '/remove/matiere/'+nomMatiere,
+                type: 'DELETE',
+                success: function(data) {
+                    
+                }
+                });
+            }
+        a(id="deleteMatiere" href="/home" cursor="not-allowed" onclick="sendDelete(event,'#{currentMatiere}')").disabled test
+        
         
         a(href='/disconnect' id="deconnexion")
             input(type='button', class="navbar-right btn btn-secondary", value="Se déconnecter")

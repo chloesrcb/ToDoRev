@@ -7,6 +7,7 @@ var matiereCtrl = require('./matiereCtrl');
 var ligneCtrl = require('./ligneCtrl');
 var colonneCtrl = require('./colonneCtrl');
 var caseCtrl = require('./caseCtrl');
+var revisionCtrl = require('./revisionCtrl');
 const events = require('events');
 
 /* GET home page. */
@@ -52,7 +53,8 @@ router.get('/', function(req, res, next) {
                   eventEmitter.emit("caseCatch",req ,res,userId,matiereName,ligneList,ensembleCase,colonneList)
                   break;
                 }
-                caseCtrl.getCases(req,res,ligneList[i],ensembleCase,pushTab)
+                
+                caseCtrl.getCases(req,res,ligneList[i].dataValues.id,ensembleCase,pushTab)
                 console.log("on en a une");
               }
               console.log("on sort")
@@ -94,7 +96,7 @@ router.post('/newColonne', function(req, res, next) {
         var q = url.parse(req.baseUrl, true);
         var matiereName=q.pathname.split('/')[2]; 
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
-          colonneCtrl.addColonne(req,res,matiereId,0)
+          revisionCtrl.addColonne(req,res,matiereId,0)
         })
 
 
@@ -125,7 +127,7 @@ router.post('/newLigne', function(req, res, next) {
         var q = url.parse(req.baseUrl, true);
         var matiereName=q.pathname.split('/')[2]; 
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
-          ligneCtrl.addLigne(req,res,matiereId,0)
+          revisionCtrl.addLigne(req,res,matiereId,0)
         })
 
 
