@@ -52,6 +52,27 @@ module.exports = {
         .catch(function(err){
             return res.status(500).json({ 'error': err});
         });
+    },
+
+    getQuizzID:function(req, res,idMatiere,libelle,callback){
+        console.log('on cherche un quizz');
+        models.Quizz.findOne({
+            where: {id_Matiere:idMatiere,
+                    libQuizz:libelle }
+        })
+        .then(function(quizzFound){
+            console.log(quizzFound)
+            if(quizzFound){   
+                console.log("La")
+                callback( quizzFound.dataValues.id);
+            }
+            else{
+                return res.status(409).json({ 'error': 'No Quizz'});
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': 'erreur recherche du quizz'});
+        });
     }
 
 }

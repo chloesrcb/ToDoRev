@@ -12,14 +12,14 @@ module.exports = {
         }
 
         models.Question.findOne({
-            where: {Question: question, Reponse:reponse, id_Quizz=idQuizz }
+            where: {Question: question, Reponse:reponse, id_Quizz:idQuizz }
         })
         .then(function(questionFound){
             if(!questionFound){
                 var newQuestion = models.Question.create({
                     Question: question,
                     Reponse:reponse,
-                    id_Quizz=idQuizz,
+                    id_Quizz:idQuizz,
                     QuizzId:idQuizz
                 })
                 .then(function(newQuestion){
@@ -38,15 +38,19 @@ module.exports = {
     },
 
     getQuestions:function(req, res,idQuizz,callback){
-        models.Questions.findAll({
+        console.log("On entre questions "+idQuizz)
+        models.Question.findAll({
             where: {id_Quizz:idQuizz}
         })
         .then(function(questionsFound){
-            if(questionFound){
-                callback( questionFound);
+            console.log("test "+questionsFound[0].dataValues.Question)
+            if(questionsFound){
+                console.log("Trouvé")
+                callback(questionsFound);
             }
             else{
-                return res.status(409).json({ 'error': 'No Questions'});
+                console.log("Pas trouve")
+                callback(undefined);
             }
         })
         .catch(function(err){

@@ -17,6 +17,8 @@ var quizzRouter = require('./routes/quizz');
 var todoRouter = require('./routes/todo');
 var revisionsRouter = require('./routes/revisions');
 var matieresRouter = require('./routes/matieres');
+var questionRouter = require('./routes/question');
+var disconnectRouter = require('./routes/disconnect');
 
 var app = express();
 
@@ -39,8 +41,10 @@ app.use('/inscription', inscriptionRouter);
 app.use('/login', loginRouter);
 app.use('/test', testRouter);
 app.use('/home', homeRouter);
+app.use('/disconnect', disconnectRouter);
 //app.use('/matiere/*', matieresRouter);
 
+app.use('/matiere/*/se_tester/*/editer', questionRouter);
 app.use('/matiere/*/se_tester', quizzRouter);
 app.use('/matiere/*/examens', examRouter);
 app.use('/matiere/*/revisions', revisionsRouter);
