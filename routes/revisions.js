@@ -58,7 +58,6 @@ router.get('/', function(req, res, next) {
           })
         })
       }
-        //res.render('quizz', { title: 'A faire' });
       }
 
   
@@ -120,7 +119,6 @@ router.patch('/',function(req,res,next){
   var q = url.parse(req.baseUrl, true);
   var pathTab=q.pathname.split("/");
   var itemId=pathTab[5]; 
-  console.log(itemId);
   caseCtrl.modifyItem(req,res,itemId,function(){
     res.redirect(200,"/home");
   })

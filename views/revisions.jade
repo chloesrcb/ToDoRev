@@ -16,6 +16,8 @@ body(id="home-page")
       });
       return false;
     }
+    
+    
   .container.bg-light
     table
       thead
@@ -23,6 +25,8 @@ body(id="home-page")
           th
           each colonne in colonneList
             th #{colonne.dataValues.LibColonne}
+              strong(onclick="deleteItem(#{colonne.dataValues.id},'#{nomMatiere}')") &#10008;
+        
           th
             form.form-inline(action="/matiere/#{nomMatiere}/revisions/newColonne" method='post') 
               .form-group
@@ -33,6 +37,8 @@ body(id="home-page")
         - for(var i = 0; i < ligneList.length; i++) {
             tr  
               th #{ligneList[i].dataValues.libLigne}
+                strong(onclick="deleteItem(#{ligneList[i].dataValues.id},'#{nomMatiere}')") &#10008;
+        
               - for(var j = 0; j < colonneList.length; j++){
                 td(onclick="inverseItemState(#{caseList[i][j].dataValues.id},'#{nomMatiere}')") #{caseList[i][j].dataValues.estCoche}
               - }

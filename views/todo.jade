@@ -17,6 +17,17 @@ body(id="home-page")
       });
       return false;
     }
+    function deleteItem(itemId,matiereName){
+      $.ajax({
+      url: '/matiere/'+matiereName+'/a_faire/delete/'+itemId,
+      type: 'DELETE',
+      success: function(data) {
+        location.reload(true)
+      }
+      });
+      return false;
+    }
+
 
   .container.bg-light.margeTop
     p.centerText.subtitle.italic.bold To-Do-List
@@ -29,12 +40,17 @@ body(id="home-page")
           .container
             input(type="checkbox" onclick="inverseItemState(#{item.dataValues.id},'#{nomMatiere}')")
             p #{item.dataValues.contenu}
+              strong(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')") &#10008;
+        
         -}
         -else{
           .container
             input(type="checkbox" checked onclick="inverseItemState(#{item.dataValues.id},'#{nomMatiere}')")
             del #{item.dataValues.contenu}
+            strong(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')") &#10008;
+        
         -}
+        
 
     //Formulaire d'ajout d'un item à la to-do-liste
     form.form-inline(action="/matiere/#{nomMatiere}/a_faire" method="post") 

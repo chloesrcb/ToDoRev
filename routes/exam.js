@@ -71,4 +71,14 @@ router.post('/', function(req, res, next) {
       }
     }
 });
+
+router.delete('/',function(req,res,next){
+  var q = url.parse(req.baseUrl, true);
+  var pathTab=q.pathname.split("/");
+  var itemId=pathTab[4]; 
+  console.log(itemId)
+  examCtrl.delExam(req,res,itemId,function(){
+    res.redirect(200,"/home");
+  })
+});
 module.exports = router;

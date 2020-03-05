@@ -37,6 +37,23 @@ module.exports = {
         });
     },
 
+    delQuestion:function(req,res,idItem,callback){
+        models.Question.destroy({
+            where: {id:idItem}
+        })
+        .then(function(itemFound){
+            if(itemFound){
+                callback();
+            }
+            else{
+                return res.status(409).json({ 'error': 'No Items'});
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': 'No Items'});
+        });
+    },
+
     getQuestions:function(req, res,idQuizz,callback){
         console.log("On entre questions "+idQuizz)
         models.Question.findAll({

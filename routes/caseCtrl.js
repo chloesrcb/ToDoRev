@@ -37,9 +37,7 @@ module.exports = {
             order: [['id','ASC']]
         })
         .then(function(itemFound){
-            console.log("Ya un result: "+itemFound);
             if(itemFound){
-                console.log(itemFound.dataValues.estCoche)
                 itemFound.update({estCoche:!itemFound.dataValues.estCoche});
                 callback();
             }

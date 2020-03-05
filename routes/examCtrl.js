@@ -56,6 +56,23 @@ module.exports = {
         .catch(function(err){
             return res.status(500).json({ 'error': err});
         });
+    },
+
+    delExam:function(req,res,idItem,callback){
+        models.Examen.destroy({
+            where: {id:idItem}
+        })
+        .then(function(itemFound){
+            if(itemFound){
+                callback();
+            }
+            else{
+                return res.status(409).json({ 'error': 'No Items'});
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': 'No Items'});
+        });
     }
 
 }

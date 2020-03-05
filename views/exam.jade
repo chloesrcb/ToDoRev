@@ -3,7 +3,18 @@ include layout.jade
 body(id="home-page")
   head
     include navbar.jade
-  
+  script(type="text/javascript").
+    function deleteItem(itemId,matiereName){
+      $.ajax({
+      url: '/matiere/'+matiereName+'/examens/'+itemId,
+      type: 'DELETE',
+      success: function(data) {
+        location.reload(true)
+      }
+      });
+      return false;
+    }
+
   .container.bg-light.mt-5
     p.centerText.subtitle.italic.bold.mt-5 Mes examens
     -if (itemsList==undefined)
@@ -12,6 +23,7 @@ body(id="home-page")
       //liste des examens pour une matière
       each item in itemsList
         li #{item.dataValues.libExamen} pour le #{item.dataValues.dateExam.getDate()}/#{item.dataValues.dateExam.getMonth()}/#{item.dataValues.dateExam.getFullYear()} à #{item.dataValues.dateExam.getHours()} : #{item.dataValues.dateExam.getMinutes()}
+          strong(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')") &#10008;
         
     //Formulaire pour l'ajout d'un examen
     form.mt-5.form-inline(action="/matiere/#{nomMatiere}/examens" method="post") 

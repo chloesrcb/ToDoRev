@@ -5,13 +5,25 @@ include layout.jade
 body(id="home-page")
   head
     include navbar.jade
-
+  script(type="text/javascript").
+      function deleteItem(itemId,libQuizz,matiereName){
+        $.ajax({
+        url: '/matiere/'+matiereName+'/se_tester/'+libQuizz+'/editer/'+itemId,
+        type: 'DELETE',
+        success: function(data) {
+          location.reload(true)
+        }
+        });
+        return false;
+      }
   .container-fluid
         p.subtitle.italic.centerText Editer quizz
         .container.col-xs-12.col-sm-12.col-md-5.col-lg-5.col-xl-5.bg-light
             //Formulaire Question-Réponse
             each question in questionsList
               p #{question.dataValues.Question} #{question.dataValues.Reponse}
+                strong(onclick="deleteItem(#{question.dataValues.id},'#{libQuizz}','#{nomMatiere}')") &#10008;
+        
             form(method="post" action="/matiere/#{nomMatiere}/se_tester/#{libQuizz}/editer")
                 .form-group
                     label(for="Q1")   
