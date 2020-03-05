@@ -5,6 +5,17 @@ include layout.jade
 body(id="home-page")
   header
       include navbar.jade
+  script(type="text/javascript").
+    function inverseItemState(itemId,matiereName){
+      $.ajax({
+      url: '/matiere/'+matiereName+'/revisions/check/'+itemId,
+      type: 'PATCH',
+      success: function(data) {
+        location.reload(true)
+      }
+      });
+      return false;
+    }
   .container.bg-light
     table
       thead
@@ -23,7 +34,7 @@ body(id="home-page")
             tr  
               th #{ligneList[i].dataValues.libLigne}
               - for(var j = 0; j < colonneList.length; j++){
-                td #{caseList[i][j].dataValues.estCoche}
+                td(onclick="inverseItemState(#{caseList[i][j].dataValues.id},'#{nomMatiere}')") #{caseList[i][j].dataValues.estCoche}
               - }
         - }
         th

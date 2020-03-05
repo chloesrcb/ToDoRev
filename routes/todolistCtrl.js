@@ -38,9 +38,30 @@ module.exports = {
         });
     },
 
+    modifyItem:function(req,res,idItem,callback){
+        models.todolistitem.findOne({
+            where: {id:idItem}
+        })
+        .then(function(itemFound){
+            if(itemFound){
+                console.log(itemFound.dataValues.done)
+                itemFound.update({done:!itemFound.dataValues.done});
+                callback();
+            }
+            else{
+                return res.status(409).json({ 'error': 'No Items'});
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': err});
+        });
+    },
+
+
     getItems:function(req, res,idMatiere,callback){
         models.todolistitem.findAll({
-            where: {id_Matiere:idMatiere}
+            where: {id_Matiere:idMatiere},
+            order: [['done','ASC']]
         })
         .then(function(itemsFound){
             if(itemsFound){

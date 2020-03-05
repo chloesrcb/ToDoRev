@@ -72,4 +72,14 @@ router.post('/', function(req, res, next) {
       }
     }
 });
+
+router.patch('/',function(req,res,next){
+  
+  var q = url.parse(req.baseUrl, true);
+  var pathTab=q.pathname.split("/");
+  var itemId=pathTab[5]; 
+  todoCtrl.modifyItem(req,res,itemId,function(){
+    res.redirect(200,"/home");
+  })
+});
 module.exports = router;

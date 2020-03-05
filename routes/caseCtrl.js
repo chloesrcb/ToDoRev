@@ -30,13 +30,35 @@ module.exports = {
             return res.status(500).json({'error': 'erreur detection de la case'});
         });
     },
-    getCases:function(req, res,idLigne,tab,callback){
+
+    modifyItem:function(req,res,idItem,callback){
+        models.CaseTab.findOne({
+            where: {id:idItem},
+            order: [['id','ASC']]
+        })
+        .then(function(itemFound){
+            console.log("Ya un result: "+itemFound);
+            if(itemFound){
+                console.log(itemFound.dataValues.estCoche)
+                itemFound.update({estCoche:!itemFound.dataValues.estCoche});
+                callback();
+            }
+            else{
+                return res.status(409).json({ 'error': 'No Items'});
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': err});
+        });
+    },
+
+    getCases:function(req, res,idLigne,tab,callback,i){
         models.CaseTab.findAll({
             where: {id_Ligne:idLigne}
         })
         .then(function(casesFound){
             if(casesFound){
-                callback(tab,casesFound);
+                callback(tab,casesFound,i);
             }
             else{
                 return res.status(409).json({ 'error': 'No Cases'});

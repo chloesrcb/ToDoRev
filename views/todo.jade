@@ -5,7 +5,19 @@ include layout.jade
 body(id="home-page")
   header
       include navbar.jade
-  
+  script(type="text/javascript").
+    function inverseItemState(itemId,matiereName){
+      $.ajax({
+      url: '/matiere/'+matiereName+'/a_faire/check/'+itemId,
+      type: 'PATCH',
+      success: function(data) {
+          
+        location.reload(true)
+      }
+      });
+      return false;
+    }
+
   .container.bg-light.margeTop
     p.centerText.subtitle.italic.bold To-Do-List
     -if (itemsList==undefined)
@@ -13,7 +25,16 @@ body(id="home-page")
     -else 
       //liste des choses à faire
       each item in itemsList
-        p #{item.dataValues.contenu} #{item.dataValues.done}
+        -if(!item.dataValues.done){
+          .container
+            input(type="checkbox" onclick="inverseItemState(#{item.dataValues.id},'#{nomMatiere}')")
+            p #{item.dataValues.contenu}
+        -}
+        -else{
+          .container
+            input(type="checkbox" checked onclick="inverseItemState(#{item.dataValues.id},'#{nomMatiere}')")
+            del #{item.dataValues.contenu}
+        -}
 
     //Formulaire d'ajout d'un item à la to-do-liste
     form.form-inline(action="/matiere/#{nomMatiere}/a_faire" method="post") 
