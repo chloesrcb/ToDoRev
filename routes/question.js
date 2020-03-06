@@ -31,6 +31,7 @@ router.get('/', function(req, res, next) {
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
           if(matiereId==undefined)
             return res.status(401).json({err: 'Matiere non trouvée'});
+            console.log('test')
           quizzCtrl.getQuizzID(req,res,matiereId,libQuizz,function(idQuizz){
               console.log("Ca ressort")
             questionCtrl.getQuestions(req,res,idQuizz,function(itemsList){

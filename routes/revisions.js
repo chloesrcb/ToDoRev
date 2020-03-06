@@ -50,21 +50,16 @@ router.get('/', function(req, res, next) {
                 
                 caseCtrl.getCases(req,res,ligneList[i].dataValues.id,ensembleCase,pushTab,i)
               }
-              
-              
-
             })
-            
           })
         })
       }
       }
-
-  
 });
 
 
-router.post('/newColonne', function(req, res, next) {
+router.post('/', function(req, res, next) {
+  console.log("Salut")
   var token =req.cookies.token;
   if(token === undefined){ 
       res.status(401);
@@ -79,16 +74,23 @@ router.post('/newColonne', function(req, res, next) {
       else{
         var q = url.parse(req.baseUrl, true);
         var matiereName=q.pathname.split('/')[2]; 
-        matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
-          revisionCtrl.addColonne(req,res,matiereId,0)
-        })
+        var action=q.pathname.split('/')[4]; 
+        if(action=="newColonne")
+          matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
+            revisionCtrl.addColonne(req,res,matiereId,0)
+          })
+        else
+          matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
+            revisionCtrl.addLigne(req,res,matiereId,0)
+          })
 
 
       }
     }
 });
-
-router.post('/newLigne', function(req, res, next) {
+/*
+router.post('newLigne', function(req, res, next) {
+  console.log("Hello")
   var token =req.cookies.token;
   if(token === undefined){ 
       res.status(401);
@@ -105,14 +107,12 @@ router.post('/newLigne', function(req, res, next) {
 
         var q = url.parse(req.baseUrl, true);
         var matiereName=q.pathname.split('/')[2]; 
-        matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
-          revisionCtrl.addLigne(req,res,matiereId,0)
-        })
+        
 
 
       }
     }
-});
+});*/
 
 router.patch('/',function(req,res,next){
   
@@ -123,6 +123,22 @@ router.patch('/',function(req,res,next){
     res.redirect(200,"/home");
   })
   //res.redirect(200,"/home");
+});
+
+router.delete('/',function(req,res,next){
+
+  var q = url.parse(req.baseUrl, true);
+  var pathTab=q.pathname.split("/");
+  var type=pathTab[5];
+  var itemId=pathTab[6];
+  if(type=="colonne")
+  revisionCtrl.delColonne(req,res,itemId,function(){
+    res.redirect(200,"/home");
+  });
+  else
+    revisionCtrl.delLigne(req,res,itemId,function(){
+      res.redirect(200,"/home");
+    });
 });
 
 

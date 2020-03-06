@@ -1,5 +1,9 @@
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
+var todolistCtrl  = require('./todolistCtrl');
+var revisionCtrl  = require('./revisionCtrl');
+var examenCtrl  = require('./examCtrl');
+var quizzCtrl  = require('./quizzCtrl');
 
 module.exports = {
     addMat: function(req, res,id){
@@ -48,6 +52,36 @@ module.exports = {
         })
         .catch(function(err){
             return res.status(500).json({ 'error': err});
+        });
+    },
+
+    delMatiere:function(req,res,nameMatiere,idUser,callback){
+        models.Matiere.findOne({
+            where: {id_User:idUser, libelle_Matiere:nameMatiere}
+        })
+        .then(function(matiereFound){
+            if(matiereFound){
+                var idMatiere=matiereFound.dataValues.id;
+                examenCtrl.delAllExam(req,res,idMatiere,function(){});
+                todolistCtrl.delAllItem(req,res,idMatiere,function(){});
+                quizzCtrl.delAllQuizz(req,res,idMatiere,function(){});
+                revisionCtrl.delAllRevision(res,res,idMatiere);
+               /* models.Matiere.destroy({
+                    where: {id_Matiere:idMatiere}
+                })
+                .then(function(matiereSupp){
+                    callback();
+                })
+                .catch(function(err){
+                    callback();
+                });*/
+            }
+            else{
+                callback();
+            }
+        })
+        .catch(function(err){
+            callback()
         });
     },
 

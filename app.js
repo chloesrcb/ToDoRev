@@ -42,13 +42,13 @@ app.use('/login', loginRouter);
 app.use('/test', testRouter);
 app.use('/home', homeRouter);
 app.use('/disconnect', disconnectRouter);
-//app.use('/matiere/*', matieresRouter);
 
 app.use('/matiere/*/se_tester/*/editer*', questionRouter);
 app.use('/matiere/*/se_tester', quizzRouter);
 app.use('/matiere/*/examens*', examRouter);
 app.use('/matiere/*/revisions*', revisionsRouter);
 app.use('/matiere/*/a_faire*', todoRouter);
+app.use('/matiere/*', matieresRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

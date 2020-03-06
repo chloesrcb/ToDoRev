@@ -2,6 +2,7 @@
 
 -var currentMatiere=undefined;
 nav.navbar.navbar-expand-md.navbar-light.bg-light
+    
     a.navbar-brand(href='/home') 
         img(src="/images/LogoWeb.png", alt="Logo ToDoRev", id="small-logo", class="d-inline-block align-top")
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
@@ -24,14 +25,14 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light
                         document.getElementById("ItemExamen").setAttribute("class","nav-link");
                         document.getElementById("ItemQuizz").setAttribute("class","nav-link");
                         document.getElementById("ItemTodo").setAttribute("class","nav-link");
-                        //document.getElementById("deleteMatiere").setAttribute("class","nav-link");
+                        document.getElementById("buttonSupprimer").disabled = false;
 
                         
                         document.getElementById("ItemRevision").setAttribute("href","/matiere/"+currentMatiere+"/revisions");
                         document.getElementById("ItemExamen").setAttribute("href","/matiere/"+currentMatiere+"/examens");
                         document.getElementById("ItemQuizz").setAttribute("href","/matiere/"+currentMatiere+"/se_tester");
                         document.getElementById("ItemTodo").setAttribute("href","/matiere/"+currentMatiere+"/a_faire");
-                        document.getElementById("deleteMatiere").setAttribute("href","delete/matiere/"+currentMatiere);
+                        document.getElementById("deleteMatiere").setAttribute("onclick","sendDelete(\'"+currentMatiere+"\')");
                     }
                 .dropdown-menu(aria-labelledby='navbarDropdown')
                     //liste des matières (dans le dropdown)
@@ -70,22 +71,34 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light
                 -else
                     a.nav-link(id="ItemTodo" href='/matiere/#{currentMatiere}/a_faire') A faire
         
-        form(method='delete' action="/delete")
-            input(type='submit', class="navbar-right btn btn-link", value="Supprimer la matière")
+        
 
+        button(type="button" class="btn btn-secondary" data-toggle="modal" id="buttonSupprimer" data-target="#exampleModal" disabled)
+            Launch Supprimer la matière
+
+        div(class="modal" id="exampleModal" tabindex="-1" role="dialog")
+            div(class="modal-dialog" role="document")
+                div(class="modal-content")
+                    div(class="modal-header")
+                        h5(class="modal-title") Supprimer la matière
+                        button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                            span(aria-hidden="true") &times;
+                    div(class="modal-body")
+                    p Etes-vous sûr de vouloir supprimer la matière?
+                    div(class="modal-footer")
+                        button(type="button" id="deleteMatiere" class="btn btn-primary" onclick="sendDelete('#{currentMatiere}')") Supprimer
+                        button(type="button" class="btn btn-secondary" data-dismiss="modal") Annuler
+        
+        a(href='/disconnect' id="deconnexion")
+            input(type='button', class="navbar-right btn btn-secondary", value="Se déconnecter")
 
         script(type="text/javascript").
-            function sendDelete(event,nomMatiere){
+            function sendDelete(nomMatiere){
                 $.ajax({
-                url: '/remove/matiere/'+nomMatiere,
+                url: '/matiere/'+nomMatiere,
                 type: 'DELETE',
                 success: function(data) {
                     
                 }
                 });
             }
-        a(id="deleteMatiere" href="/home" cursor="not-allowed" onclick="sendDelete(event,'#{currentMatiere}')").disabled test
-        
-        
-        a(href='/disconnect' id="deconnexion")
-            input(type='button', class="navbar-right btn btn-secondary", value="Se déconnecter")

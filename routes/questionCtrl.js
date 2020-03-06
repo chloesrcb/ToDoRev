@@ -43,6 +43,7 @@ module.exports = {
         })
         .then(function(itemFound){
             if(itemFound){
+                console.log("item supp:"+itemFound)
                 callback();
             }
             else{
@@ -60,7 +61,7 @@ module.exports = {
             where: {id_Quizz:idQuizz}
         })
         .then(function(questionsFound){
-            console.log("test "+questionsFound[0].dataValues.Question)
+            console.log("test "+questionsFound)
             if(questionsFound){
                 console.log("Trouvé")
                 callback(questionsFound);

@@ -28,10 +28,6 @@ router.get('/', function(req, res, next) {
             console.log("Identite confirmé:" +userId);
             var q = url.parse(req.baseUrl, true);
             var matiereName=q.pathname.split('/')[2]; 
-            switch(onglet){
-
-
-            }
 
             matiereCtrl.getMatieres(req,res,userId,function(matieresList){
                 console.log(matiereName);
@@ -51,5 +47,34 @@ router.get('/', function(req, res, next) {
     }
     //res.render('test');
 });
+
+router.delete('/',function(req,res,next){
+    var token =req.cookies.token;
+    if(token === undefined){ 
+        console.log("pas de token");
+        res.status(401);
+        res.redirect("/login");
+    }
+    else{
+        console.log("Il y a un token")
+        userId=jwtUtils.verify(token);
+        console.log("On a le resultat");
+        if(userId===undefined){
+            console.log("token invalide");
+            res.status(401);
+            res.redirect("/login");
+        }
+        else{
+            console.log("Identite confirmé:" +userId);
+            var q = url.parse(req.baseUrl, true);
+            var pathTab=q.pathname.split("/");
+            var matiereName=pathTab[2];
+            matiereCtrl.delMatiere(req,res,matiereName,userId,function(){
+                res.status(401);
+                res.redirect(302,"/home");
+            });
+        }
+    }
+  });
 
 module.exports = router;

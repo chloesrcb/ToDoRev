@@ -91,6 +91,22 @@ module.exports = {
         .catch(function(err){
             return res.status(500).json({ 'error': 'No Items'});
         });
+    },
+    delAllItem:function(req,res,idMatiere,callback){
+        models.todolistitem.destroy({
+            where: {id_Matiere:idMatiere}
+        })
+        .then(function(itemFound){
+            if(itemFound){
+                callback();
+            }
+            else{
+                callback();
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': 'No Items'});
+        });
     }
 
 }

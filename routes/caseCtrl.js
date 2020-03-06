@@ -50,6 +50,42 @@ module.exports = {
         });
     },
 
+    delCasesFromLigne:function(req,res,idLigne,callback){
+        models.CaseTab.destroy({
+            where: {id_Ligne:idLigne}
+        })
+        .then(function(itemFound){
+            if(itemFound){
+                callback();
+            }
+            else{
+                callback();
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': 'No Items'});
+        });
+
+    },
+
+    delCasesFromColonne:function(req,res,idColonne,callback){
+        models.CaseTab.destroy({
+            where: {id_Colonne:idColonne}
+        })
+        .then(function(itemFound){
+            if(itemFound){
+                callback();
+            }
+            else{
+                callback();
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': 'No Items'});
+        });
+
+    },
+
     getCases:function(req, res,idLigne,tab,callback,i){
         models.CaseTab.findAll({
             where: {id_Ligne:idLigne}

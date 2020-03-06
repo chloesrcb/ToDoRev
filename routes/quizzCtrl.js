@@ -1,5 +1,6 @@
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
+var questionCtrl  = require('./questionCtrl');
 
 module.exports = {
     addQuizz: function(req, res,idMatiere){
@@ -55,7 +56,6 @@ module.exports = {
     },
 
     getQuizzID:function(req, res,idMatiere,libelle,callback){
-        console.log('on cherche un quizz');
         models.Quizz.findOne({
             where: {id_Matiere:idMatiere,
                     libQuizz:libelle }
@@ -68,6 +68,26 @@ module.exports = {
             }
             else{
                 return res.status(409).json({ 'error': 'No Quizz'});
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': 'erreur recherche du quizz'});
+        });
+    },
+
+    delAllQuizz:function(req,res,idMatiere,callback){
+        models.Quizz.findAll({
+            where: {id_Matiere:idMatiere}
+        })
+        .then(function(quizzFound){
+            if(quizzFound){   
+                for(var i=0;i<quizzFound.lentgh;i++){
+                    questionCtrl.delQuestion(req,res,quizzFound[i].dataValues.id,function(){});
+                }
+                callback();
+            }
+            else{
+                callback();
             }
         })
         .catch(function(err){
