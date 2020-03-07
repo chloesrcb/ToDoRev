@@ -59,7 +59,6 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
-  console.log("Salut")
   var token =req.cookies.token;
   if(token === undefined){ 
       res.status(401);
@@ -115,13 +114,38 @@ router.post('newLigne', function(req, res, next) {
 });*/
 
 router.patch('/',function(req,res,next){
-  
-  var q = url.parse(req.baseUrl, true);
-  var pathTab=q.pathname.split("/");
-  var itemId=pathTab[5]; 
-  caseCtrl.modifyItem(req,res,itemId,function(){
-    res.redirect(200,"/home");
-  })
+  var token =req.cookies.token;
+  if(token === undefined){ 
+      res.status(401);
+      res.redirect("/login");
+  }
+  else{
+      userId=jwtUtils.verify(token);
+      if(userId===undefined){
+          res.status(401);
+          res.redirect("/login");
+      }
+      else{
+        var q = url.parse(req.baseUrl, true);
+        var pathTab=q.pathname.split("/");
+        var itemId=pathTab[5]; 
+        caseCtrl.getCaseFromId(req,res,itemId,function(item){
+          colonneCtrl.getColonneFromId(req,res,item.dataValues.ColonneId,function(colonne){
+            if(colonne){
+                //console.log("call "+ colonne.dataValues.id_Matiere)
+                matiereCtrl.getMatiereFromId(req,res,colonne.dataValues.id_Matiere,function(matiereFound){
+                    if(matiereFound && matiereFound.dataValues.id_User==userId){
+                      console.log("On modif "+itemId)
+                      caseCtrl.modifyItem(req,res,itemId,function(){
+                        res.redirect(200,"/home");
+                      });
+                    }
+                });
+              }
+          });
+        });
+      }
+  }
   //res.redirect(200,"/home");
 });
 

@@ -1,11 +1,18 @@
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
+var matiereCtrl = require('./matiereCtrl');
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
 
 module.exports = {
     addExam: function(req, res,idMatiere){
         //Params
         var libelle = req.body.libelle;
         var date = req.body.date;
+        
+        const window = new JSDOM('').window;
+        const DOMPurify = createDOMPurify(window);
+        libelle=DOMPurify.sanitize(libelle);
         
         if(libelle==undefined || date==undefined){
             return res.status(400).json({'error': 'missing parameters'});
@@ -58,9 +65,9 @@ module.exports = {
         });
     },
 
-    delExam:function(req,res,idItem,callback){
+    delExam:function(req,res,matiereId,idItem,callback){
         models.Examen.destroy({
-            where: {id:idItem}
+            where: {id:idItem, id_Matiere:matiereId}
         })
         .then(function(itemFound){
             if(itemFound){

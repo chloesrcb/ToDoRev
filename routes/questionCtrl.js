@@ -1,5 +1,7 @@
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
 
 module.exports = {
     addQuestion: function(req, res,idQuizz){
@@ -7,6 +9,11 @@ module.exports = {
         var question = req.body.question;
         var reponse = req.body.reponse;
         
+        const window = new JSDOM('').window;
+        const DOMPurify = createDOMPurify(window);
+        reponse=DOMPurify.sanitize(reponse);
+        question=DOMPurify.sanitize(question);
+
         if(question==undefined || reponse==undefined){
             return res.status(400).json({'error': 'missing parameters'});
         }

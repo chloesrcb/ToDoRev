@@ -1,7 +1,5 @@
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
-var colonneCtrl = require('./colonneCtrl');
-var caseCtrl = require('./caseCtrl');
 
 module.exports = {
     

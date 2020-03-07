@@ -1,5 +1,7 @@
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
+var matiereCtrl = require('./matiereCtrl');
+var colonneCtrl = require('./colonneCtrl');
 
 module.exports = {
     addCase: function(req, res,idLigne,idColonne){
@@ -30,14 +32,29 @@ module.exports = {
             return res.status(500).json({'error': 'erreur detection de la case'});
         });
     },
+    getCaseFromId:function(req,res,idItem,callback){
+        models.CaseTab.findOne({
+            where: {id:idItem}
+        })
+        .then(function(itemFound){
+            if(itemFound){ 
+                callback(itemFound);
+            }
+            else{
+                return res.status(409).json({ 'error': 'No Items'});
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': err});
+        });
+    },
 
     modifyItem:function(req,res,idItem,callback){
         models.CaseTab.findOne({
-            where: {id:idItem},
-            order: [['id','ASC']]
+            where: {id:idItem}
         })
         .then(function(itemFound){
-            if(itemFound){
+            if(itemFound){ 
                 itemFound.update({estCoche:!itemFound.dataValues.estCoche});
                 callback();
             }

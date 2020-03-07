@@ -1,11 +1,17 @@
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
 
 module.exports = {
     addTodoItem: function(req, res,idMatiere){
         //Params
         var contenu = req.body.contenu;
-        
+
+        const window = new JSDOM('').window;
+        const DOMPurify = createDOMPurify(window);
+        contenu=DOMPurify.sanitize(contenu);
+
         if(contenu==undefined){
             return res.status(400).json({'error': 'missing parameters'});
         }
@@ -38,9 +44,9 @@ module.exports = {
         });
     },
 
-    modifyItem:function(req,res,idItem,callback){
+    modifyItem:function(req,res,matiereID,idItem,callback){
         models.todolistitem.findOne({
-            where: {id:idItem}
+            where: {id:idItem, id_Matiere:matiereID}
         })
         .then(function(itemFound){
             if(itemFound){

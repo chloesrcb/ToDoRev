@@ -1,7 +1,5 @@
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
-var ligneCtrl = require('./ligneCtrl');
-var caseCtrl = require('./caseCtrl');
 
 module.exports = {
     getColonnes:function(req, res,idMatiere,callback){
@@ -11,6 +9,24 @@ module.exports = {
         .then(function(colonnesFound){
             if(colonnesFound){
                 callback(colonnesFound);
+            }
+            else{
+                return res.status(409).json({ 'error': 'No Colonnes'});
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': err});
+        });
+    },
+    getColonneFromId:function(req, res,id,callback){
+        console.log(id)
+        models.Colonne.findOne({
+            where: {id:id}
+        })
+        .then(function(colonneFound){
+            console.log(colonneFound)
+            if(colonneFound){
+                callback(colonneFound);
             }
             else{
                 return res.status(409).json({ 'error': 'No Colonnes'});

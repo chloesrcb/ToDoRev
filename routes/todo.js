@@ -74,13 +74,33 @@ router.post('/', function(req, res, next) {
 });
 
 router.patch('/',function(req,res,next){
-  
-  var q = url.parse(req.baseUrl, true);
-  var pathTab=q.pathname.split("/");
-  var itemId=pathTab[5]; 
-  todoCtrl.modifyItem(req,res,itemId,function(){
-    res.redirect(200,"/home");
-  })
+  var token =req.cookies.token;
+  if(token === undefined){ 
+      console.log("pas de token");
+      res.status(401);
+      res.redirect("/login");
+  }
+  else{
+      console.log("Il y a un token")
+      userId=jwtUtils.verify(token);
+      console.log("On a le resultat");
+      if(userId===undefined){
+          console.log("token invalide");
+          res.status(401);
+          res.redirect("/login");
+      }
+      else{
+        var q = url.parse(req.baseUrl, true);
+        var pathTab=q.pathname.split("/");
+        var matiereName=pathTab[2]; 
+        var itemId=pathTab[5]; 
+        matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
+          todoCtrl.modifyItem(req,res,matiereId,itemId,function(){
+            res.redirect(200,"/home");
+          });
+        });
+      }
+    }
 });
 
 router.delete('/',function(req,res,next){

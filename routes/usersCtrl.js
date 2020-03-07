@@ -2,6 +2,8 @@
 var bcrypt  = require('bcrypt');
 var jwtUtils= require('../utils/jwt.utils');
 var models  = require('../models');
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
 
 //Constantes
 const EMAIL_REJEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -14,6 +16,14 @@ module.exports = {
         var password = req.body.password;
         var nom = req.body.nom;
         var prenom = req.body.prenom;
+
+        const window = new JSDOM('').window;
+        const DOMPurify = createDOMPurify(window);
+        email=DOMPurify.sanitize(email);
+        password=DOMPurify.sanitize(password);
+        nom=DOMPurify.sanitize(nom);
+        prenom=DOMPurify.sanitize(prenom);
+
         console.log(email)
         //Si il manque une entrée
         if(email==null || password==null || nom==null || prenom==null){
@@ -69,6 +79,12 @@ module.exports = {
         //Param
         var email = req.body.email;
         var password = req.body.password;
+
+        const window = new JSDOM('').window;
+        const DOMPurify = createDOMPurify(window);
+        email=DOMPurify.sanitize(email);
+        password=DOMPurify.sanitize(password);
+
         if(email==null || password==null ){
             return res.status(400).json({'error': 'missing parameters'});
         }

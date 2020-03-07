@@ -2,6 +2,8 @@ var ligneCtrl = require('./ligneCtrl');
 var colonneCtrl = require('./colonneCtrl');
 var caseCtrl = require('./caseCtrl');
 var models  = require('../models');
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
 
 /*
 **Ce fichier reuni les fonctions qui affecte les lignes et les colonnes de Revisions
@@ -13,7 +15,11 @@ module.exports = {
     addLigne: function(req, res,idMatiere,numLigne){
         //Params
         var libelle = req.body.libelle;
-        
+
+        const window = new JSDOM('').window;
+        const DOMPurify = createDOMPurify(window);
+        libelle=DOMPurify.sanitize(libelle);
+
         if(libelle==undefined){
             return res.status(400).json({'error': 'missing parameters'});
         }
@@ -109,7 +115,9 @@ module.exports = {
     addColonne: function(req, res,idMatiere,numColonne){
         //Params
         var libelle = req.body.libelle;
-        
+        const window = new JSDOM('').window;
+        const DOMPurify = createDOMPurify(window);
+        libelle=DOMPurify.sanitize(libelle);
         if(libelle==undefined){
             return res.status(400).json({'error': 'missing parameters'});
         }

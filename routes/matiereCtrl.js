@@ -4,12 +4,17 @@ var todolistCtrl  = require('./todolistCtrl');
 var revisionCtrl  = require('./revisionCtrl');
 var examenCtrl  = require('./examCtrl');
 var quizzCtrl  = require('./quizzCtrl');
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
 
 module.exports = {
     addMat: function(req, res,id){
         //Params
         var libelle = req.body.libelle;
+        const window = new JSDOM('').window;
+        const DOMPurify = createDOMPurify(window);
         
+        libelle=DOMPurify.sanitize(libelle);
         if(libelle==undefined){
             return res.status(400).json({'error': 'missing parameters'});
         }
@@ -38,9 +43,9 @@ module.exports = {
             return res.status(500).json({'error': err});
         });
     },
-    getMatieres:function(req, res,id,callback){
+    getMatieres:function(req, res,idUser,callback){
         models.Matiere.findAll({
-            where: {id_User:id}
+            where: {id_User:idUser}
         })
         .then(function(matieresFound){
             if(matieresFound){
@@ -82,6 +87,24 @@ module.exports = {
         })
         .catch(function(err){
             callback()
+        });
+    },
+
+    getMatiereFromId:function(req,res,id,callback){
+        console.log("On est call")
+        models.Matiere.findOne({
+            where: {id:id}
+        })
+        .then(function(matiereFound){
+            if(matiereFound){
+                callback(matiereFound);
+            }
+            else{
+                callback(undefined);
+            }
+        })
+        .catch(function(err){
+            callback(undefined)
         });
     },
 
