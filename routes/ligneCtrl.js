@@ -19,6 +19,25 @@ module.exports = {
         .catch(function(err){
             return res.status(500).json({ 'error': 'probleme trouve ligne'});
         });
+    },
+    
+    getLigneFromId:function(req, res,id,callback){
+        console.log(id)
+        models.Ligne.findOne({
+            where: {id:id}
+        })
+        .then(function(ligneFound){
+            console.log(ligneFound)
+            if(ligneFound){
+                callback(ligneFound);
+            }
+            else{
+                return res.status(409).json({ 'error': 'No Colonnes'});
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': err});
+        });
     }
 
 }

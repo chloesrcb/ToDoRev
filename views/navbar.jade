@@ -20,8 +20,6 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light
                 script(type="text/javascript").
                     function change_dropdown(newText){
                         document.getElementById("navbarDropdown").innerHTML=newText;
-                        
-                        alert(newText);
                         currentMatiere=newText;
                         document.getElementById("ItemRevision").setAttribute("class","nav-link");
                         document.getElementById("ItemExamen").setAttribute("class","nav-link");
@@ -93,7 +91,7 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light
         a(href='/disconnect' id="deconnexion")
             input(type='button', class="navbar-right btn btn-secondary", value="Se déconnecter")
 
-        script(type="text/javascript" src="./node_modules/dompurify/dist/purify.min.js")
+
         script(type="text/javascript").
             function sendDelete(nomMatiere){
                 $.ajax({

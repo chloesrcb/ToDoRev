@@ -74,14 +74,16 @@ router.post('/', function(req, res, next) {
         var q = url.parse(req.baseUrl, true);
         var matiereName=q.pathname.split('/')[2]; 
         var action=q.pathname.split('/')[4]; 
-        if(action=="newColonne")
+        if(action=="newColonne"){
           matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
             revisionCtrl.addColonne(req,res,matiereId,0)
-          })
-        else
+          });
+        }
+        else{
           matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
             revisionCtrl.addLigne(req,res,matiereId,0)
-          })
+          });
+        }
 
 
       }
@@ -150,19 +152,54 @@ router.patch('/',function(req,res,next){
 });
 
 router.delete('/',function(req,res,next){
+  var token =req.cookies.token;
+  if(token === undefined){ 
+      res.status(401);
+      res.redirect("/login");
+  }
+  else{
+      userId=jwtUtils.verify(token);
+      if(userId===undefined){
+          res.status(401);
+          res.redirect("/login");
+      }
+      else{
+        var q = url.parse(req.baseUrl, true);
+        var pathTab=q.pathname.split("/");
+        var type=pathTab[5];
+        var itemId=pathTab[6];
+        if(type=="colonne"){
+          colonneCtrl.getColonneFromId(req,res,itemId,function(colonne){
+            if(colonne){
+                //console.log("call "+ colonne.dataValues.id_Matiere)
+                matiereCtrl.getMatiereFromId(req,res,colonne.dataValues.id_Matiere,function(matiereFound){
+                    if(matiereFound && matiereFound.dataValues.id_User==userId){
+                      revisionCtrl.delColonne(req,res,itemId,function(){
+                        res.redirect(200,"/home");
+                      });
+                    }
+                });
+            }
+          });
+        }
+        
+        else{
+          ligneCtrl.getLigneFromId(req,res,itemId,function(ligne){
+            if(ligne){
+              //console.log("call "+ colonne.dataValues.id_Matiere)
+              matiereCtrl.getMatiereFromId(req,res,ligne.dataValues.id_Matiere,function(matiereFound){
+                  if(matiereFound && matiereFound.dataValues.id_User==userId){
+                    revisionCtrl.delLigne(req,res,itemId,function(){
+                      res.redirect(200,"/home");
+                    });
+                  }
+              });
+            }
+          });
+        }
 
-  var q = url.parse(req.baseUrl, true);
-  var pathTab=q.pathname.split("/");
-  var type=pathTab[5];
-  var itemId=pathTab[6];
-  if(type=="colonne")
-  revisionCtrl.delColonne(req,res,itemId,function(){
-    res.redirect(200,"/home");
-  });
-  else
-    revisionCtrl.delLigne(req,res,itemId,function(){
-      res.redirect(200,"/home");
-    });
+      }
+    }
 });
 
 

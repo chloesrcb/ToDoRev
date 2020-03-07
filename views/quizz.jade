@@ -14,7 +14,7 @@ body(id="home-page")
       each item in itemsList
         p #{item.dataValues.libQuizz}
         .container.my-5
-          a(href="/matiere/#{nomMatiere}/se_tester/#{item.dataValues.libQuizz}/editer" class="btn btn-info col-md-4 offset-md-1") Me tester
+          a(href="/matiere/#{nomMatiere}/se_tester/#{item.dataValues.libQuizz}/doQuizz" class="btn btn-info col-md-4 offset-md-1") Me tester
           a(href="/matiere/#{nomMatiere}/se_tester/#{item.dataValues.libQuizz}/editer" class="btn btn-secondary col-md-4 offset-md-1") Editer
 
     form.mt-5.form-inline(action="/matiere/#{nomMatiere}/se_tester" method="post") 

@@ -81,6 +81,23 @@ module.exports = {
         .catch(function(err){
             return res.status(500).json({ 'error': err});
         });
+    },
+
+    getQuestionFromId:function(req, res,idQuestion,callback){
+        models.Question.findOne({
+            where: {id:idQuestion}
+        })
+        .then(function(questionFound){
+            if(questionFound){
+                callback(questionFound);
+            }
+            else{
+                callback(undefined);
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': err});
+        });
     }
 
 }

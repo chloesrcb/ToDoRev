@@ -1,0 +1,18 @@
+//page d'édition d'un quizz
+
+include layout.jade
+    
+body(id="home-page")
+  head
+    include navbar.jade
+  .container-fluid
+        p.subtitle.italic.centerText S'exercer
+        .container.col-xs-12.col-sm-12.col-md-5.col-lg-5.col-xl-5.bg-light
+            //Formulaire Question-Réponse
+            each question in questionsList
+              p.centerText #{question.dataValues.Question} #{question.dataValues.Reponse}
+        
+      
+  
+  footer
+    include footer.jade

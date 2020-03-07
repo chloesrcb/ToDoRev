@@ -28,6 +28,7 @@ router.get('/', function(req, res, next) {
         var q = url.parse(req.baseUrl, true); 
         var matiereName=q.pathname.split('/')[2];
         var libQuizz=q.pathname.split('/')[4];
+        var page=q.pathname.split('/')[5];
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
           if(matiereId==undefined)
             return res.status(401).json({err: 'Matiere non trouvée'});
@@ -38,8 +39,10 @@ router.get('/', function(req, res, next) {
                 console.log("On a les questions")
                 matiereCtrl.getMatieres(req,res,userId,function(matieresList){
                   //console.log(matieresList)
-                    res.render('editQuizz', { title: 'A faire',nomMatiere:matiereName, questionsList:itemsList, matieresList:matieresList, libQuizz:libQuizz });
-    
+                  if(page=="editer")
+                    res.render('editQuizz', { title: libQuizz,nomMatiere:matiereName, questionsList:itemsList, matieresList:matieresList, libQuizz:libQuizz });
+                  else 
+                    res.render('doQuizz', { title: 'Editer Questionnaire',nomMatiere:matiereName, questionsList:itemsList, matieresList:matieresList, libQuizz:libQuizz });
                 })
               })
           })
@@ -83,13 +86,43 @@ router.post('/', function(req, res, next) {
   });
 
   router.delete('/',function(req,res,next){
-    var q = url.parse(req.baseUrl, true);
-    var pathTab=q.pathname.split("/");
-    var itemId=pathTab[6]; 
-    console.log(itemId)
-    questionCtrl.delQuestion(req,res,itemId,function(){
-      res.redirect(200,"/home");
-    })
+    
+    var token =req.cookies.token;
+    if(token === undefined){ 
+        console.log("pas de token");
+        res.status(401);
+        res.redirect("/login");
+    }
+    else{
+        console.log("Il y a un token")
+        userId=jwtUtils.verify(token);
+        console.log("On a le resultat");
+        if(userId===undefined){
+            console.log("token invalide");
+            res.status(401);
+            res.redirect("/login");
+        }
+        else{
+          var q = url.parse(req.baseUrl, true);
+          var pathTab=q.pathname.split("/");
+          var itemId=pathTab[6]; 
+          questionCtrl.getQuestionFromId(req,res,itemId,function(question){
+            if(question){
+              quizzCtrl.getQuizzFromId(req,res,question.dataValues.id_Quizz,function(quizz){
+                if(quizz){
+                  matiereCtrl.getMatiereFromId(req,res,quizz.dataValues.id_Matiere,function(matiere){
+                    if(matiere && matiere.dataValues.id_User==userId){
+                      questionCtrl.delQuestion(req,res,itemId,function(){
+                        res.redirect(200,"/home");
+                      })
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+    }
   });
 
 module.exports = router;

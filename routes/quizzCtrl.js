@@ -43,6 +43,23 @@ module.exports = {
         });
     },
 
+    getQuizzFromId:function(req,res,idQuizz,callback){
+        models.Quizz.findOne({
+            where: {id:idQuizz}
+        })
+        .then(function(quizzFound){
+            if(quizzFound){
+                callback( quizzFound);
+            }
+            else{
+                callback(undefined);
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': err});
+        });
+    },
+
     getQuizz:function(req, res,idMatiere,callback){
         console.log('on cherche un quizz');
         models.Quizz.findAll({
