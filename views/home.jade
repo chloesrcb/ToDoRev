@@ -23,7 +23,7 @@ body(id="home-page")
       br
       .container.bg-light.col-xs-12.col-sm-12.col-md-10.col-lg-10.col-xl-10
           p(class="subtitle italic centerText") Choses à faire
-          -if(exams.length==0)
+          -if(todos.length==0)
             p Vous n'avez rien à faire.
           -else{
               each mat in todos

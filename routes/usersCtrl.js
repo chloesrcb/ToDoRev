@@ -61,7 +61,7 @@ module.exports = {
                         prenom: prenom
                     })
                     .then(function(newUser){
-                        return res.status(201).json({'userId': newUser.id})
+                        return res.redirect("/login")
                     })
                     .catch(function(err){
                         return res.status(500).json({'error':'cannot add user'});
@@ -78,7 +78,7 @@ module.exports = {
         //Param
         var email = req.body.email;
         var password = req.body.password;
-
+        console.log("On cherche")
         const window = new JSDOM('').window;
         const DOMPurify = createDOMPurify(window);
         email=DOMPurify.sanitize(email);
@@ -92,11 +92,13 @@ module.exports = {
         })
         .then(function(userFound){
             if(userFound){
+                console.log("il estd dans le abase")
                 bcrypt.compare(password, userFound.password, function(errBycrypt, resBycrypt){
                     if(resBycrypt){
                         var token=jwtUtils.generateTokenForUser(userFound);
                         res.cookie('token',token,{maxAge:3600000, httpOnly: true})
                         res.status(200)
+                        console.log("On redirteifge")
                         return res.redirect("/home");
                     }else{
                         return res.status(403).json({'error': 'invalid password'});

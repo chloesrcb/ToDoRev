@@ -25,14 +25,18 @@ router.get('/', function(req, res, next) {
     }
     else{
       matiereCtrl.getMatieres(req,res,userId,function(matieresList){
+        console.log("On y est: "+matieresList)
         
+        if(matieresList.length==0){
+          return res.render('home', { title: 'Home', exams:[], matieresList:[],todos:[]});
+        }
         var ensExams=[];
         var ensTodo=[];
         var nDate=0;
         var nTodo=0;
         var eventEmitter = new events.EventEmitter();
         eventEmitter.on("homePret",function(req,res,userId,ensExams,ensTodo){
-        
+          console.log(ensTodo)
           matiereCtrl.getMatieres(req,res,userId,function(matieresList){
             return res.render('home', { title: 'Home', exams:ensExams, matieresList:matieresList ,todos:ensTodo});
           })
@@ -41,11 +45,13 @@ router.get('/', function(req, res, next) {
         eventEmitter.on("dateRecup",function(req,res,userId,ensExams,matieresList){
           for(var i=0;i<matieresList.length;i++){
             todoCtrl.getItemsForHome(req,res,matieresList[i].dataValues.id,matieresList[i].dataValues.libelle_Matiere,function(todos,matiereName){
-              nTodo++;
+
               if(todos.length>0){
                 ensTodo.push("/matiere/"+matiereName+"/a_faire");
               }
-              if(nTodo==matieresList.length-1){
+              
+              nTodo++;
+              if(nTodo>=matieresList.length){
                 eventEmitter.emit("homePret",req,res,userId,ensExams,ensTodo)
               }
             })
@@ -56,11 +62,11 @@ router.get('/', function(req, res, next) {
 
         for(var i=0;i<matieresList.length;i++){
           examCtrl.getExamWithinTwoWeeks(req,res,matieresList[i].dataValues.id,matieresList[i].dataValues.libelle_Matiere,function(exams,matiereName){
-            nDate++;
             if(exams.length>0){
               ensExams.push("/matiere/"+matiereName+"/examens");
             }
-            if(nDate==matieresList.length-1){
+            nDate++;  
+            if(nDate>=matieresList.length){
               eventEmitter.emit("dateRecup",req,res,userId,ensExams,matieresList)
             }
           })
