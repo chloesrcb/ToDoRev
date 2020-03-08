@@ -33,7 +33,6 @@ router.get('/', function(req, res, next) {
         var eventEmitter = new events.EventEmitter();
         eventEmitter.on("homePret",function(req,res,userId,ensExams,ensTodo){
         
-          console.log("Le tab:"+ensExams)
           matiereCtrl.getMatieres(req,res,userId,function(matieresList){
             return res.render('home', { title: 'Home', exams:ensExams, matieresList:matieresList ,todos:ensTodo});
           })
@@ -42,7 +41,6 @@ router.get('/', function(req, res, next) {
         eventEmitter.on("dateRecup",function(req,res,userId,ensExams,matieresList){
           for(var i=0;i<matieresList.length;i++){
             todoCtrl.getItemsForHome(req,res,matieresList[i].dataValues.id,matieresList[i].dataValues.libelle_Matiere,function(todos,matiereName){
-              console.log("on pousse"+nTodo)
               nTodo++;
               if(todos.length>0){
                 ensTodo.push("/matiere/"+matiereName+"/a_faire");
@@ -58,7 +56,6 @@ router.get('/', function(req, res, next) {
 
         for(var i=0;i<matieresList.length;i++){
           examCtrl.getExamWithinTwoWeeks(req,res,matieresList[i].dataValues.id,matieresList[i].dataValues.libelle_Matiere,function(exams,matiereName){
-            console.log("on pousse"+nDate)
             nDate++;
             if(exams.length>0){
               ensExams.push("/matiere/"+matiereName+"/examens");

@@ -4,7 +4,6 @@ var models  = require('../models');
 module.exports = {
     
     getLignes: function(req, res,idMatiere,callback){
-        console.log("Je suis appelé");
         models.Ligne.findAll({
             where: {id_Matiere:idMatiere}
         })
@@ -22,12 +21,10 @@ module.exports = {
     },
     
     getLigneFromId:function(req, res,id,callback){
-        console.log(id)
         models.Ligne.findOne({
             where: {id:id}
         })
         .then(function(ligneFound){
-            console.log(ligneFound)
             if(ligneFound){
                 callback(ligneFound);
             }

@@ -11,16 +11,12 @@ var quizzCtrl = require('./quizzCtrl');
 router.get('/', function(req, res, next) {
   var token =req.cookies.token;
   if(token === undefined){ 
-      console.log("pas de token");
       res.status(401);
       res.redirect("/login");
   }
   else{
-      console.log("Il y a un token")
       userId=jwtUtils.verify(token);
-      console.log("On a le resultat");
       if(userId===undefined){
-          console.log("token invalide");
           res.status(401);
           res.redirect("/login");
       }
@@ -32,13 +28,9 @@ router.get('/', function(req, res, next) {
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
           if(matiereId==undefined)
             return res.status(401).json({err: 'Matiere non trouvée'});
-            console.log('test')
           quizzCtrl.getQuizzID(req,res,matiereId,libQuizz,function(idQuizz){
-              console.log("Ca ressort")
             questionCtrl.getQuestions(req,res,idQuizz,function(itemsList){
-                console.log("On a les questions")
                 matiereCtrl.getMatieres(req,res,userId,function(matieresList){
-                  //console.log(matieresList)
                   if(page=="editer")
                     res.render('editQuizz', { title: libQuizz,nomMatiere:matiereName, questionsList:itemsList, matieresList:matieresList, libQuizz:libQuizz });
                   else 
@@ -56,19 +48,14 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
-    console.log("Salut")
     var token =req.cookies.token;
     if(token === undefined){ 
-        console.log("pas de token");
         res.status(401);
         res.redirect("/login");
     }
     else{
-        console.log("Il y a un token")
         userId=jwtUtils.verify(token);
-        console.log("On a le resultat");
         if(userId===undefined){
-            console.log("token invalide");
             res.status(401);
             res.redirect("/login");
         }
@@ -89,16 +76,12 @@ router.post('/', function(req, res, next) {
     
     var token =req.cookies.token;
     if(token === undefined){ 
-        console.log("pas de token");
         res.status(401);
         res.redirect("/login");
     }
     else{
-        console.log("Il y a un token")
         userId=jwtUtils.verify(token);
-        console.log("On a le resultat");
         if(userId===undefined){
-            console.log("token invalide");
             res.status(401);
             res.redirect("/login");
         }

@@ -19,12 +19,10 @@ module.exports = {
         });
     },
     getColonneFromId:function(req, res,id,callback){
-        console.log(id)
         models.Colonne.findOne({
             where: {id:id}
         })
         .then(function(colonneFound){
-            console.log(colonneFound)
             if(colonneFound){
                 callback(colonneFound);
             }

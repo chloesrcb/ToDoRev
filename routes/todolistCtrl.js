@@ -21,7 +21,6 @@ module.exports = {
                 id_Matiere:idMatiere }
         })
         .then(function(itemFound){
-            console.log(itemFound);
             if(!itemFound){
                 var newItem = models.todolistitem.create({
                     contenu: contenu,
@@ -50,7 +49,6 @@ module.exports = {
         })
         .then(function(itemFound){
             if(itemFound){
-                console.log(itemFound.dataValues.done)
                 itemFound.update({done:!itemFound.dataValues.done});
                 callback();
             }

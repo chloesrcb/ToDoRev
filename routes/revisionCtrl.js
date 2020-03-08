@@ -31,7 +31,6 @@ module.exports = {
         })
         .then(function(ligneFound){
             if(!ligneFound){
-                console.log("On creer la ligne")
                 var newLigne = models.Ligne.create({
                     libLigne: libelle,
                     numLigne:numLigne,
@@ -39,15 +38,11 @@ module.exports = {
                     MatiereId:idMatiere
                 })
                 .then(function(newLigne){
-                    console.log("ligne Creee: "+newLigne.id)
                     var idLigne=newLigne.id;
                     colonneCtrl.getColonnes(req,res,idMatiere,function(colonneList){
-                       console.log("On a tous ce quil faut pour les cases, nbColonne:"+colonneList.length);
                        var i=0; 
                        while(i<colonneList.length){
-                            console.log('on cree la case ('+i+','+1+')');
                             caseCtrl.addCase(req,res,idLigne,colonneList[i].dataValues.id);
-                            console.log('cree')
                             i++;
                         }
 
@@ -83,14 +78,12 @@ module.exports = {
                 }
             })
             .catch(function(err){
-                console.log("soucis:" +err)
                 return res.status(500).json({ 'error': 'No Items'});
             });
         });
     },
 
     delColonne:function(req,res,idItem,callback){
-        console.log("on supprime")
         //on delete les cases avant pour la contrainte foreign_key
         caseCtrl.delCasesFromColonne(req,res,idItem,function(){
             models.Colonne.destroy({
@@ -106,7 +99,6 @@ module.exports = {
                 }
             })
             .catch(function(err){
-                console.log("soucis:" +err)
                 return res.status(500).json({ 'error': 'No Items'});
             });
         });
@@ -137,18 +129,13 @@ module.exports = {
                     MatiereId:idMatiere
                 })
                 .then(function(newColonne){
-                    console.log("colonne Creee: ");
                     
                     ligneCtrl.getLignes(req,res,idMatiere,function(ligneList){});
                     var idColonne=newColonne.id;
-                    console.log("colonne Creee: "+idMatiere);
                     ligneCtrl.getLignes(req,res,idMatiere,function(ligneList){
-                        console.log("On a tout ce quil faut pour les cases, nbColonne:"+ligneList.length);
                         var i=0; 
                         while(i<ligneList.length){
-                            console.log('on cree la case ('+i+','+1+')');
                             caseCtrl.addCase(req,res,ligneList[i].dataValues.id,idColonne);
-                            console.log('cree')
                             i++;
                         }
 
@@ -157,7 +144,6 @@ module.exports = {
                     });
                 })
                 .catch(function(err){
-                    console.log(err);
                     return res.status(500).json({'error':'erreur a la fin'});
                 });
             }else{
@@ -170,9 +156,7 @@ module.exports = {
     
     delAllRevision:function(req,res,idMatiere){
         colonneCtrl.getColonnes(req,res,idMatiere,function(colonneList){
-            console.log(colonneList)
             for(var i=0;i<colonneList.length;i++){
-                console.log("colId="+colonneList[i].dataValues.id)
                 this.delColonne(req,res,colonneList[i].dataValues.id,function(){});
             }
         });

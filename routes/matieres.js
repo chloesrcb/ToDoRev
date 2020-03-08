@@ -8,69 +8,52 @@ var matiereCtrl = require('./matiereCtrl');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    console.log("La");
     var token =req.cookies.token;
     if(token === undefined){ 
-        console.log("pas de token");
         res.status(401);
         res.redirect("/login");
     }
     else{
-        console.log("Il y a un token")
         userId=jwtUtils.verify(token);
-        console.log("On a le resultat");
         if(userId===undefined){
-            console.log("token invalide");
             res.status(401);
             res.redirect("/login");
         }
         else{
-            console.log("Identite confirmé:" +userId);
             var q = url.parse(req.baseUrl, true);
             var matiereName=q.pathname.split('/')[2]; 
 
             matiereCtrl.getMatieres(req,res,userId,function(matieresList){
-                console.log(matiereName);
-                console.log("Tu devrais pas etre ici")
                 matieresList.forEach(matiere => {
                         if(matiereName==matiere.dataValues.libelle_Matiere){
-                            console.log("La! id= "+matiere.dataValues.id);
                         }
                 });
                 userCtrl.getClient(userId,req,res,function(user){
-                //if(user===undefined)return;
                 res.render('home', { title: 'Home',userId: user,matieresList:matieresList });
             });
         })
 
         }
     }
-    //res.render('test');
 });
 
 router.delete('/',function(req,res,next){
     var token =req.cookies.token;
     if(token === undefined){ 
-        console.log("pas de token");
         res.status(401);
         res.redirect("/login");
     }
     else{
-        console.log("Il y a un token")
         userId=jwtUtils.verify(token);
-        console.log("On a le resultat");
         if(userId===undefined){
-            console.log("token invalide");
             res.status(401);
             res.redirect("/login");
         }
         else{
-            console.log("Identite confirmé:" +userId);
             var q = url.parse(req.baseUrl, true);
             var pathTab=q.pathname.split("/");
             var matiereName=pathTab[2];
             matiereCtrl.delMatiere(req,res,matiereName,userId,function(){
-                res.status(401);
                 res.redirect(302,"/home");
             });
         }

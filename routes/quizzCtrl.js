@@ -61,7 +61,6 @@ module.exports = {
     },
 
     getQuizz:function(req, res,idMatiere,callback){
-        console.log('on cherche un quizz');
         models.Quizz.findAll({
             where: {id_Matiere:idMatiere}
         })
@@ -84,9 +83,7 @@ module.exports = {
                     libQuizz:libelle }
         })
         .then(function(quizzFound){
-            console.log(quizzFound)
             if(quizzFound){   
-                console.log("La")
                 callback( quizzFound.dataValues.id);
             }
             else{
@@ -104,9 +101,7 @@ module.exports = {
         })
         .then(function(quizzFound){
             if(quizzFound){   
-                console.log(quizzFound[0])
                 for(var i=0;i<quizzFound.length;i++){
-                    console.log("On va tout delete")
                     questionCtrl.delAllQuestion(req,res,quizzFound[i].dataValues.id,function(){});
                 }
                 models.Quizz.destroy({

@@ -98,7 +98,8 @@ nav.navbar.navbar-expand-md.navbar-light.bg-light
                 url: '/matiere/'+nomMatiere,
                 type: 'DELETE',
                 success: function(data) {
-                    
+                    location.assign("/home")
                 }
                 });
+                location.assign("/home")
             }

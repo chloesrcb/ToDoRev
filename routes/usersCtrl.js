@@ -24,7 +24,6 @@ module.exports = {
         nom=DOMPurify.sanitize(nom);
         prenom=DOMPurify.sanitize(prenom);
 
-        console.log(email)
         //Si il manque une entrée
         if(email==null || password==null || nom==null || prenom==null){
             return res.status(400).json({'error': 'missing parameters'});

@@ -91,7 +91,6 @@ router.post('/', function(req, res, next) {
 });
 /*
 router.post('newLigne', function(req, res, next) {
-  console.log("Hello")
   var token =req.cookies.token;
   if(token === undefined){ 
       res.status(401);
@@ -134,10 +133,8 @@ router.patch('/',function(req,res,next){
         caseCtrl.getCaseFromId(req,res,itemId,function(item){
           colonneCtrl.getColonneFromId(req,res,item.dataValues.ColonneId,function(colonne){
             if(colonne){
-                //console.log("call "+ colonne.dataValues.id_Matiere)
                 matiereCtrl.getMatiereFromId(req,res,colonne.dataValues.id_Matiere,function(matiereFound){
                     if(matiereFound && matiereFound.dataValues.id_User==userId){
-                      console.log("On modif "+itemId)
                       caseCtrl.modifyItem(req,res,itemId,function(){
                         res.redirect(200,"/home");
                       });
@@ -171,7 +168,6 @@ router.delete('/',function(req,res,next){
         if(type=="colonne"){
           colonneCtrl.getColonneFromId(req,res,itemId,function(colonne){
             if(colonne){
-                //console.log("call "+ colonne.dataValues.id_Matiere)
                 matiereCtrl.getMatiereFromId(req,res,colonne.dataValues.id_Matiere,function(matiereFound){
                     if(matiereFound && matiereFound.dataValues.id_User==userId){
                       revisionCtrl.delColonne(req,res,itemId,function(){
@@ -186,7 +182,6 @@ router.delete('/',function(req,res,next){
         else{
           ligneCtrl.getLigneFromId(req,res,itemId,function(ligne){
             if(ligne){
-              //console.log("call "+ colonne.dataValues.id_Matiere)
               matiereCtrl.getMatiereFromId(req,res,ligne.dataValues.id_Matiere,function(matiereFound){
                   if(matiereFound && matiereFound.dataValues.id_User==userId){
                     revisionCtrl.delLigne(req,res,itemId,function(){

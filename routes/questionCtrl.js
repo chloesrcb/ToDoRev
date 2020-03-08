@@ -62,12 +62,10 @@ module.exports = {
     },
 
     delAllQuestion:function(req,res,idQuizz,callback){
-        console.log("On delete Tout")
         models.Question.destroy({
             where: {id_Quizz:idQuizz}
         })
         .then(function(itemFound){
-            console.log(itemFound)
             if(itemFound){
                 callback();
             }
@@ -81,18 +79,14 @@ module.exports = {
     },
 
     getQuestions:function(req, res,idQuizz,callback){
-        console.log("On entre questions "+idQuizz)
         models.Question.findAll({
             where: {id_Quizz:idQuizz}
         })
         .then(function(questionsFound){
-            console.log("test "+questionsFound)
             if(questionsFound){
-                console.log("Trouvé")
                 callback(questionsFound);
             }
             else{
-                console.log("Pas trouve")
                 callback(undefined);
             }
         })

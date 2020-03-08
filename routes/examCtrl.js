@@ -25,9 +25,7 @@ module.exports = {
                 id_Matiere:idMatiere }
         })
         .then(function(examFound){
-            console.log("Il y a un res")
             if(!examFound){
-                console.log("On tente de creer")
                 var newExam = models.Examen.create({
                     libExamen: libelle,
                     dateExam: date,
@@ -103,7 +101,6 @@ module.exports = {
                 callback(undefined,matiereName)
             }
         }).catch(function(error){
-            console.log(error)
             return res.status(500).json({ 'error': error});
         })
     },

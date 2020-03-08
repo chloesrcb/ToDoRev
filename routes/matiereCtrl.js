@@ -75,7 +75,6 @@ module.exports = {
                 var nCol=0;
                 colonneCtrl.getColonnes(req,res,idMatiere,function(colonneList){
                     for(var i=0;i<colonneList.length;i++){
-                        console.log("colId="+colonneList[i].dataValues.id)
                         revisionCtrl.delColonne(req,res,colonneList[i].dataValues.id,function(){
                             nCol++;
                             if(nCol==colonneList.length-1){
@@ -83,7 +82,6 @@ module.exports = {
                             }
                         });
                     }
-                    console.log(colonneList.length+"=?"+n);
                 });
                 
                 ligneCtrl.getLignes(req,res,idMatiere,function(ligneList){
@@ -111,7 +109,6 @@ module.exports = {
     },
 
     getMatiereFromId:function(req,res,id,callback){
-        console.log("On est call")
         models.Matiere.findOne({
             where: {id:id}
         })
