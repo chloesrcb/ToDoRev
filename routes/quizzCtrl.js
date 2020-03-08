@@ -104,10 +104,20 @@ module.exports = {
         })
         .then(function(quizzFound){
             if(quizzFound){   
-                for(var i=0;i<quizzFound.lentgh;i++){
-                    questionCtrl.delQuestion(req,res,quizzFound[i].dataValues.id,function(){});
+                console.log(quizzFound[0])
+                for(var i=0;i<quizzFound.length;i++){
+                    console.log("On va tout delete")
+                    questionCtrl.delAllQuestion(req,res,quizzFound[i].dataValues.id,function(){});
                 }
-                callback();
+                models.Quizz.destroy({
+                    where: {id_Matiere:idMatiere}
+                })
+                .then(function(quizzFound){
+                    callback();
+                })
+                .catch(function(err){
+                    return res.status(500).json({ 'error': 'erreur recherche du quizz'});
+                });
             }
             else{
                 callback();

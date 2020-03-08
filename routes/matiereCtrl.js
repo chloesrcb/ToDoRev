@@ -3,6 +3,8 @@ var models  = require('../models');
 var todolistCtrl  = require('./todolistCtrl');
 var revisionCtrl  = require('./revisionCtrl');
 var examenCtrl  = require('./examCtrl');
+var colonneCtrl  = require('./colonneCtrl');
+var ligneCtrl  = require('./ligneCtrl');
 var quizzCtrl  = require('./quizzCtrl');
 const createDOMPurify = require('dompurify');
 const { JSDOM } = require('jsdom');
@@ -70,16 +72,34 @@ module.exports = {
                 examenCtrl.delAllExam(req,res,idMatiere,function(){});
                 todolistCtrl.delAllItem(req,res,idMatiere,function(){});
                 quizzCtrl.delAllQuizz(req,res,idMatiere,function(){});
-                revisionCtrl.delAllRevision(res,res,idMatiere);
-               /* models.Matiere.destroy({
-                    where: {id_Matiere:idMatiere}
+                var nCol=0;
+                colonneCtrl.getColonnes(req,res,idMatiere,function(colonneList){
+                    for(var i=0;i<colonneList.length;i++){
+                        console.log("colId="+colonneList[i].dataValues.id)
+                        revisionCtrl.delColonne(req,res,colonneList[i].dataValues.id,function(){
+                            nCol++;
+                            if(nCol==colonneList.length-1){
+                                
+                            }
+                        });
+                    }
+                    console.log(colonneList.length+"=?"+n);
+                });
+                
+                ligneCtrl.getLignes(req,res,idMatiere,function(ligneList){
+                    for(var i=0;i<ligneList.length;i++){
+                        revisionCtrl.delLigne(req,res,ligneList[i].dataValues.id,function(){});
+                    }
+                });
+                models.Matiere.destroy({
+                    where: {id_User:idUser, libelle_Matiere:nameMatiere}
                 })
                 .then(function(matiereSupp){
                     callback();
                 })
-                .catch(function(err){
+                .catch(function(error){
                     callback();
-                });*/
+                });
             }
             else{
                 callback();

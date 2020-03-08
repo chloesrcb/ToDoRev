@@ -90,6 +90,7 @@ module.exports = {
     },
 
     delColonne:function(req,res,idItem,callback){
+        console.log("on supprime")
         //on delete les cases avant pour la contrainte foreign_key
         caseCtrl.delCasesFromColonne(req,res,idItem,function(){
             models.Colonne.destroy({
@@ -169,8 +170,10 @@ module.exports = {
     
     delAllRevision:function(req,res,idMatiere){
         colonneCtrl.getColonnes(req,res,idMatiere,function(colonneList){
+            console.log(colonneList)
             for(var i=0;i<colonneList.length;i++){
-                delColonne(req,res,colonneList[i].dataValues.id,function(){});
+                console.log("colId="+colonneList[i].dataValues.id)
+                this.delColonne(req,res,colonneList[i].dataValues.id,function(){});
             }
         });
         ligneCtrl.getLignes(req,res,idMatiere,function(ligneList){

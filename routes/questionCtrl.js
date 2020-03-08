@@ -50,11 +50,29 @@ module.exports = {
         })
         .then(function(itemFound){
             if(itemFound){
-                console.log("item supp:"+itemFound)
                 callback();
             }
             else{
-                return res.status(409).json({ 'error': 'No Items'});
+                callback();
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': 'No Items'});
+        });
+    },
+
+    delAllQuestion:function(req,res,idQuizz,callback){
+        console.log("On delete Tout")
+        models.Question.destroy({
+            where: {id_Quizz:idQuizz}
+        })
+        .then(function(itemFound){
+            console.log(itemFound)
+            if(itemFound){
+                callback();
+            }
+            else{
+                callback();
             }
         })
         .catch(function(err){
