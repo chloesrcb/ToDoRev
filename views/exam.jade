@@ -22,7 +22,13 @@ body(id="home-page")
     -else 
       //liste des examens pour une matière
       each item in itemsList
-        li #{item.dataValues.libExamen} pour le #{item.dataValues.dateExam.getDate()}/#{item.dataValues.dateExam.getMonth()}/#{item.dataValues.dateExam.getFullYear()} à #{item.dataValues.dateExam.getHours()} : #{item.dataValues.dateExam.getMinutes()}
+        -var itemValue;
+        -if(item.dataValues.dateExam.getDate()<10)  itemValue="0"+item.dataValues.dateExam.getUTCDate()+"/"; else itemValue=item.dataValues.dateExam.getUTCDate()+"/"
+        -if(item.dataValues.dateExam.getMonth()<9)  itemValue+="0"+(item.dataValues.dateExam.getMonth()+1)+"/"; else itemValue+=item.dataValues.dateExam.getMonth()+1+"/"
+        -itemValue+=item.dataValues.dateExam.getFullYear()+" à "
+        -if(item.dataValues.dateExam.getUTCHours()<10)  itemValue+="0"+item.dataValues.dateExam.getUTCHours()+":"; else itemValue+=item.dataValues.dateExam.getUTCHours()+":"
+        -if(item.dataValues.dateExam.getUTCMinutes()<10)  itemValue+="0"+item.dataValues.dateExam.getUTCMinutes(); else itemValue+=item.dataValues.dateExam.getMinutes()
+        li #{item.dataValues.libExamen} pour le #{itemValue}
           strong(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')") &#10008;
         
     //Formulaire pour l'ajout d'un examen

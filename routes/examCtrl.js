@@ -3,7 +3,8 @@ var models  = require('../models');
 var matiereCtrl = require('./matiereCtrl');
 const createDOMPurify = require('dompurify');
 const { JSDOM } = require('jsdom');
-
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 module.exports = {
     addExam: function(req, res,idMatiere){
         //Params
@@ -80,6 +81,31 @@ module.exports = {
         .catch(function(err){
             return res.status(500).json({ 'error': 'No Items'});
         });
+    },
+
+
+    getExamWithinTwoWeeks:function(req,res,idMatiere,matiereName,callback){
+        models.Examen.findAll({
+            where: {
+                id_Matiere:idMatiere,
+                dateExam: {
+                    [Op.gt]: new Date(),
+                    [Op.lt]: new Date(new Date().valueOf() + 14 * 24 * 60 * 60 * 1000)
+                }
+            }
+              
+        }).then(function(examsFound)
+        {
+            if(examsFound){
+                callback(examsFound,matiereName);
+            }
+            else{
+                callback(undefined,matiereName)
+            }
+        }).catch(function(error){
+            console.log(error)
+            return res.status(500).json({ 'error': error});
+        })
     },
 
     delAllExam:function(req,res,idMatiere,callback){

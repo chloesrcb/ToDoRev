@@ -82,6 +82,23 @@ module.exports = {
         });
     },
 
+    getItemsForHome:function(req, res,idMatiere,matiereName,callback){
+        models.todolistitem.findAll({
+            where: {id_Matiere:idMatiere, done:0}
+        })
+        .then(function(itemsFound){
+            if(itemsFound){
+                callback(itemsFound,matiereName);
+            }
+            else{
+                callback(undefined,matiereName)
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': err});
+        });
+    },
+
     delItem:function(req,res,idItem,callback){
         models.todolistitem.destroy({
             where: {id:idItem}

@@ -1,16 +1,26 @@
 //page d'édition d'un quizz
 
 include layout.jade
-    
+-var quesRepList
 body(id="home-page")
+  script(type="text/javascript").
+    function revealResponse(){
+      var list=document.getElementsByName("reponse");
+      for(var i=0;i<list.length;i++){
+        list[i].hidden=false;
+      }
+      
+    }
   head
     include navbar.jade
   .container-fluid
         p.subtitle.italic.centerText S'exercer
         .container.col-xs-12.col-sm-12.col-md-5.col-lg-5.col-xl-5.bg-light
             //Formulaire Question-Réponse
-            each question in questionsList
-              p.centerText #{question.dataValues.Question} #{question.dataValues.Reponse}
+          each question in questionsList
+            p().centerText #{question.dataValues.Question} 
+              strong(name="reponse" hidden) #{question.dataValues.Reponse}
+          button(class="btn btn-primary center" onclick="revealResponse()") Correction
         
       
   
