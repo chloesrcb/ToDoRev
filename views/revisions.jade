@@ -59,7 +59,12 @@ body(id="home-page")
                 strong(onclick="deleteLigne(#{ligneList[i].dataValues.id},'#{nomMatiere}')") &#10008;
         
               - for(var j = 0; j < colonneList.length; j++){
-                td(onclick="inverseItemState(#{caseList[i][j].dataValues.id},'#{nomMatiere}')") #{caseList[i][j].dataValues.estCoche}
+                -if(caseList[i][j].dataValues.estCoche){
+                   td(onclick="inverseItemState(#{caseList[i][j].dataValues.id},'#{nomMatiere}')").centerText &#10008;
+                -}
+                -else{
+                  td(onclick="inverseItemState(#{caseList[i][j].dataValues.id},'#{nomMatiere}')")
+                -}
               - }
         - }
         th
