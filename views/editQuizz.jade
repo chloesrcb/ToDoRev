@@ -27,11 +27,11 @@ body(id="home-page")
             form(method="post" action="/matiere/#{nomMatiere}/se_tester/#{libQuizz}/editer")
                 .form-group
                     label(for="Q1")   
-                    input(type="text" name="question" class="form-control" placeholder="Question") 
+                    input(type="text" name="question" class="form-control" placeholder="Question" required) 
                 
                 .form-group
                     label(for="R1")
-                    input(type="text" name="reponse" class="form-control" placeholder="Réponse")
+                    input(type="text" name="reponse" class="form-control" placeholder="Réponse" required)
                 input(type="submit" class="btn btn-info col-md-4 offset-md-1")
                 //mettre Q1 et R1 par défaut (1 question) puis avec un + recréer ce formulaire pour chaque ajout
                 //d'une question (essayer de changer nom R2,R3 pour récupérer les questions)

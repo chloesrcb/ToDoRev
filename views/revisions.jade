@@ -37,7 +37,7 @@ body(id="home-page")
         return false;
       }
   
-  .container.bg-light
+  .container.bg-light.mt-5
     table
       thead
         tr
@@ -50,7 +50,7 @@ body(id="home-page")
             form.form-inline(action="/matiere/#{nomMatiere}/revisions/newColonne" method='post') 
               .form-group
                 label(for="ajout")   
-                input(type="text" name='libelle' class="form-control" placeholder="Ajouter une colonne") 
+                input(type="text" name='libelle' class="form-control" placeholder="Ajouter une colonne" required) 
                 button(type="submit" class="btn btn-info") +
       tbody
         - for(var i = 0; i < ligneList.length; i++) {
@@ -71,7 +71,7 @@ body(id="home-page")
           form.form-inline(action="/matiere/#{nomMatiere}/revisions/newLigne" method='post') 
             .form-group
               label(for="ajout")   
-              input(type="text" name='libelle' class="form-control" placeholder="Ajouter une ligne") 
+              input(type="text" name='libelle' class="form-control" placeholder="Ajouter une ligne" required) 
               button(type="submit" class="btn btn-info") +
 
 

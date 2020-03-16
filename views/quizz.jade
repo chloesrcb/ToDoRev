@@ -20,7 +20,7 @@ body(id="home-page")
     form.mt-5.form-inline(action="/matiere/#{nomMatiere}/se_tester" method="post") 
       .form-group.mx-auto
         label(for="ajout")   
-        input(type="text" name='libelle' class="form-control" placeholder="Nouveau Test").mb-5 
+        input(type="text" name='libelle' class="form-control" placeholder="Nouveau Test" required).mb-5 
         button(type="submit" class="btn btn-info").mb-5 +
   
   footer

@@ -13,19 +13,19 @@ body(id="register-page")
             form(class="login" method="post")
                 .form-group
                     label(for="nom")   
-                    input(type="text" name="nom" class="form-control" placeholder="Nom") 
+                    input(type="text" name="nom" class="form-control" placeholder="Nom" required) 
                 
                 .form-group
                     label(for="prenom")
-                    input(type="text" name="prenom" class="form-control" placeholder="Prénom")
+                    input(type="text" name="prenom" class="form-control" placeholder="Prénom" required)
                     
                 .form-group
                     label(for="email") 
-                    input(type="text" name="email" class="form-control" placeholder="Adresse mail")
+                    input(type="text" name="email" class="form-control" placeholder="Adresse mail" required)
 
                 .form-group
                     label(for="password")
-                    input(type="password" name="password" class="form-control" placeholder="Mot de passe")
+                    input(type="password" name="password" class="form-control" placeholder="Mot de passe" required)
                     p.italic *Le mot de passe doit contenir 6 à 10 caractères dont 1 majuscule, 1 minuscule, 1 caractère spécial et 1 nombre.
 
                     a(href='/' id="retour").mt-3
