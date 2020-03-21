@@ -38,17 +38,22 @@ body(id="home-page")
       each item in itemsList
         -if(!item.dataValues.done){
           .container
-            input(type="checkbox" onclick="inverseItemState(#{item.dataValues.id},'#{nomMatiere}')")
-            p #{item.dataValues.contenu}
-              strong(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')") &#10008;
+            .d-inline-block
+              input(type="checkbox" onclick="inverseItemState(#{item.dataValues.id},'#{nomMatiere}')")
+            .d-inline-block
+              p #{item.dataValues.contenu}
+                strong(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')") &#10008;
         
         -}
         -else{
           .container
-            input(type="checkbox" checked onclick="inverseItemState(#{item.dataValues.id},'#{nomMatiere}')")
-            del #{item.dataValues.contenu}
-            strong(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')") &#10008;
-        
+            .d-inline-block
+              input(type="checkbox" checked onclick="inverseItemState(#{item.dataValues.id},'#{nomMatiere}')")
+              
+            .d-inline-block
+              del #{item.dataValues.contenu}
+              strong(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')") &#10008;
+          
         -}
         
 
