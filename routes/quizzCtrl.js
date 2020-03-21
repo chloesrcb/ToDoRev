@@ -121,6 +121,34 @@ module.exports = {
         .catch(function(err){
             return res.status(500).json({ 'error': 'erreur recherche du quizz'});
         });
+    },
+
+    delQuizz:function(req,res,idMatiere,idQuizz,callback){
+        models.Quizz.findOne({
+            where: {id:idQuizz,
+                id_Matiere:idMatiere}
+        })
+        .then(function(quizzFound){
+            if(quizzFound){   
+                questionCtrl.delAllQuestion(req,res,quizzFound.dataValues.id,function(){});
+                models.Quizz.destroy({
+                    where: {id:idQuizz,
+                        id_Matiere:idMatiere}
+                })
+                .then(function(quizzFound){
+                    callback();
+                })
+                .catch(function(err){
+                    return res.status(500).json({ 'error': 'erreur recherche du quizz'});
+                });
+            }
+            else{
+                callback();
+            }
+        })
+        .catch(function(err){
+            return res.status(500).json({ 'error': 'erreur recherche du quizz'});
+        });
     }
 
 }

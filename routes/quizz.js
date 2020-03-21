@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
           quizzCtrl.getQuizz(req,res,matiereId,function(itemsList){
             matiereCtrl.getMatieres(req,res,userId,function(matieresList){
               //console.log(matieresList)
-                res.render('quizz', { title: 'A faire',nomMatiere:matiereName, itemsList:itemsList, matieresList:matieresList });
+                res.render('quizz', { title: 'Se tester',nomMatiere:matiereName, itemsList:itemsList, matieresList:matieresList });
 
             })
           })
@@ -71,5 +71,34 @@ router.post('/', function(req, res, next) {
       }
     }
 });
+
+
+
+router.delete('/',function(req,res,next){
+  var token =req.cookies.token;
+  if(token === undefined){ 
+      res.status(401);
+      res.redirect("/login");
+  }
+  else{
+    userId=jwtUtils.verify(token);
+    if(userId===undefined){
+        res.status(401);
+        res.redirect("/login");
+    }
+    else{
+      var q = url.parse(req.baseUrl, true);
+      var pathTab=q.pathname.split("/");
+      var matiereName=pathTab[2]; 
+      var itemId=pathTab[4]; 
+      matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
+        quizzCtrl.delQuizz(req,res,matiereId,itemId,function(){
+          res.redirect(200,"/home");
+        })
+      });
+    }
+  }
+});
+
 
 module.exports = router;
