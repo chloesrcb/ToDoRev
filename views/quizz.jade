@@ -16,6 +16,7 @@ body(id="home-page")
       });
       return false;
     }
+
   .container.bg-light.mt-5
     p.centerText.subtitle.italic.bold Vos tests
     -if (itemsList==undefined)
@@ -23,8 +24,8 @@ body(id="home-page")
     -else 
       //liste des tests créés dans une matière avec bouton me tester et éditer pour chacun
       each item in itemsList
-        .container.mx-5.my-5
-          p.mx-5 
+        .container.col-xs-12.col-sm-12.col-md-10.col-lg-10.col-xl-10
+          p
             button(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')").btn.btn-link.mb-1 &#10008;  
             strong.big #{item.dataValues.libQuizz}
           a(href="/matiere/#{nomMatiere}/se_tester/#{item.dataValues.libQuizz}/doQuizz" class="btn btn-info col-md-4 offset-md-1") Me tester
