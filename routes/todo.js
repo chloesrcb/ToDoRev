@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
       }
       else{
         var q = url.parse(req.baseUrl, true);
-        var matiereName=q.pathname.split('/')[2]; 
+        var matiereName=decodeURI(q.pathname.split('/')[2]); 
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
           if(matiereId==undefined)
             return res.status(401).json({err: 'Matiere non trouvée'});
@@ -55,7 +55,7 @@ router.post('/', function(req, res, next) {
       }
       else{
         var q = url.parse(req.baseUrl, true);
-        var matiereName=q.pathname.split('/')[2]; 
+        var matiereName=decodeURI(q.pathname.split('/')[2]); 
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
           todoCtrl.addTodoItem(req,res,matiereId);
         })
@@ -78,8 +78,8 @@ router.patch('/',function(req,res,next){
       else{
         var q = url.parse(req.baseUrl, true);
         var pathTab=q.pathname.split("/");
-        var matiereName=pathTab[2]; 
-        var itemId=pathTab[5]; 
+        var matiereName=decodeURI(pathTab[2]); 
+        var itemId=decodeURI(pathTab[5]); 
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
           todoCtrl.modifyItem(req,res,matiereId,itemId,function(){
             res.redirect(200,"/home");
@@ -92,7 +92,7 @@ router.patch('/',function(req,res,next){
 router.delete('/',function(req,res,next){
   var q = url.parse(req.baseUrl, true);
   var pathTab=q.pathname.split("/");
-  var itemId=pathTab[5]; 
+  var itemId=decodeURI(pathTab[5]); 
   todoCtrl.delItem(req,res,itemId,function(){
     res.redirect(200,"/home");
   })

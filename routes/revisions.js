@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
       }
       else{
         var q = url.parse(req.baseUrl, true);
-        var matiereName=q.pathname.split('/')[2]; 
+        var matiereName=decodeURI(q.pathname.split('/')[2]); 
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
           if(matiereId==undefined)
             return res.status(401).json({err: 'Matiere non trouvée'});
@@ -72,8 +72,8 @@ router.post('/', function(req, res, next) {
       }
       else{
         var q = url.parse(req.baseUrl, true);
-        var matiereName=q.pathname.split('/')[2]; 
-        var action=q.pathname.split('/')[4]; 
+        var matiereName=decodeURI(q.pathname.split('/')[2]); 
+        var action=decodeURI(q.pathname.split('/')[4]); 
         if(action=="newColonne"){
           matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
             revisionCtrl.addColonne(req,res,matiereId,0)
@@ -129,7 +129,7 @@ router.patch('/',function(req,res,next){
       else{
         var q = url.parse(req.baseUrl, true);
         var pathTab=q.pathname.split("/");
-        var itemId=pathTab[5]; 
+        var itemId=decodeURI(pathTab[5]); 
         caseCtrl.getCaseFromId(req,res,itemId,function(item){
           colonneCtrl.getColonneFromId(req,res,item.dataValues.ColonneId,function(colonne){
             if(colonne){
@@ -163,8 +163,8 @@ router.delete('/',function(req,res,next){
       else{
         var q = url.parse(req.baseUrl, true);
         var pathTab=q.pathname.split("/");
-        var type=pathTab[5];
-        var itemId=pathTab[6];
+        var type=decodeURI(pathTab[5]);
+        var itemId=decodeURI(pathTab[6]);
         if(type=="colonne"){
           colonneCtrl.getColonneFromId(req,res,itemId,function(colonne){
             if(colonne){

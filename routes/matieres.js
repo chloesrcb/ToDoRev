@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
         }
         else{
             var q = url.parse(req.baseUrl, true);
-            var matiereName=q.pathname.split('/')[2]; 
+            var matiereName=decodeURI(q.pathname.split('/')[2]); 
 
             matiereCtrl.getMatieres(req,res,userId,function(matieresList){
                 matieresList.forEach(matiere => {
@@ -52,7 +52,7 @@ router.delete('/',function(req,res,next){
         else{
             var q = url.parse(req.baseUrl, true);
             var pathTab=q.pathname.split("/");
-            var matiereName=pathTab[2];
+            var matiereName=decodeURI(pathTab[2]);
             matiereCtrl.delMatiere(req,res,matiereName,userId,function(){
                 res.redirect(302,"/home");
             });

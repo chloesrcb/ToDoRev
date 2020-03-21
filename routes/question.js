@@ -22,9 +22,9 @@ router.get('/', function(req, res, next) {
       }
       else{
         var q = url.parse(req.baseUrl, true); 
-        var matiereName=q.pathname.split('/')[2];
-        var libQuizz=q.pathname.split('/')[4];
-        var page=q.pathname.split('/')[5];
+        var matiereName=decodeURI(q.pathname.split('/')[2]);
+        var libQuizz=decodeURI(q.pathname.split('/')[4]);
+        var page=decodeURI(q.pathname.split('/')[5]);
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
           if(matiereId==undefined)
             return res.status(401).json({err: 'Matiere non trouvée'});
@@ -61,8 +61,8 @@ router.post('/', function(req, res, next) {
         }
         else{
           var q = url.parse(req.baseUrl, true);
-          var matiereName=q.pathname.split('/')[2]; 
-          var libQuizz=q.pathname.split('/')[4];
+          var matiereName=decodeURI(q.pathname.split('/')[2]); 
+          var libQuizz=decodeURI(q.pathname.split('/')[4]);
           matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
             quizzCtrl.getQuizzID(req,res,matiereId,libQuizz,function(idQuizz){
                 questionCtrl.addQuestion(req,res,idQuizz);
@@ -88,7 +88,7 @@ router.post('/', function(req, res, next) {
         else{
           var q = url.parse(req.baseUrl, true);
           var pathTab=q.pathname.split("/");
-          var itemId=pathTab[6]; 
+          var itemId=decodeURI(pathTab[6]); 
           questionCtrl.getQuestionFromId(req,res,itemId,function(question){
             if(question){
               quizzCtrl.getQuizzFromId(req,res,question.dataValues.id_Quizz,function(quizz){

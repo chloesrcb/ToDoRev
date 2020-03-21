@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
       }
       else{
         var q = url.parse(req.baseUrl, true);
-        var matiereName=q.pathname.split('/')[2]; 
+        var matiereName=decodeURI(q.pathname.split('/')[2]); 
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
           if(matiereId==undefined)
             return res.status(401).json({err: 'Matiere non trouvée'});
@@ -64,7 +64,7 @@ router.post('/', function(req, res, next) {
       }
       else{
         var q = url.parse(req.baseUrl, true);
-        var matiereName=q.pathname.split('/')[2]; 
+        var matiereName=decodeURI(q.pathname.split('/')[2]); 
         matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
           quizzCtrl.addQuizz(req,res,matiereId);
         })
@@ -89,8 +89,8 @@ router.delete('/',function(req,res,next){
     else{
       var q = url.parse(req.baseUrl, true);
       var pathTab=q.pathname.split("/");
-      var matiereName=pathTab[2]; 
-      var itemId=pathTab[4]; 
+      var matiereName=decodeURI(pathTab[2]); 
+      var itemId=decodeURI(pathTab[4]); 
       matiereCtrl.getMatiereId(matiereName,userId,function(matiereId){
         quizzCtrl.delQuizz(req,res,matiereId,itemId,function(){
           res.redirect(200,"/home");
