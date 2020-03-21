@@ -28,9 +28,11 @@ body(id="home-page")
         -itemValue+=item.dataValues.dateExam.getFullYear()+" à "
         -if(item.dataValues.dateExam.getUTCHours()<10)  itemValue+="0"+item.dataValues.dateExam.getUTCHours()+":"; else itemValue+=item.dataValues.dateExam.getUTCHours()+":"
         -if(item.dataValues.dateExam.getUTCMinutes()<10)  itemValue+="0"+item.dataValues.dateExam.getUTCMinutes(); else itemValue+=item.dataValues.dateExam.getMinutes()
-        li #{item.dataValues.libExamen} pour le #{itemValue}
-          strong(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')") &#10008;
-        
+        li
+          strong #{item.dataValues.libExamen}
+            button(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')").btn.btn-link.mb-1.ml-2 &#10008;
+          p pour le #{itemValue}
+         
     //Formulaire pour l'ajout d'un examen
     form.mt-5.form-inline(action="/matiere/#{nomMatiere}/examens" method="post") 
       .form-group.mx-auto

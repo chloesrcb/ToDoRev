@@ -43,8 +43,8 @@ body(id="home-page")
         tr
           th
           each colonne in colonneList
-            th #{colonne.dataValues.LibColonne}
-              strong(onclick="deleteColonne(#{colonne.dataValues.id},'#{nomMatiere}')") &#10008;
+            th 
+              button(onclick="deleteColonne(#{colonne.dataValues.id},'#{nomMatiere}')").btn.btn-link &#10008; #{colonne.dataValues.LibColonne}
         
           th
             form.form-inline(action="/matiere/#{nomMatiere}/revisions/newColonne" method='post') 
@@ -55,15 +55,17 @@ body(id="home-page")
       tbody
         - for(var i = 0; i < ligneList.length; i++) {
             tr  
-              th #{ligneList[i].dataValues.libLigne}
-                strong(onclick="deleteLigne(#{ligneList[i].dataValues.id},'#{nomMatiere}')") &#10008;
+              th 
+                button(onclick="deleteLigne(#{ligneList[i].dataValues.id},'#{nomMatiere}')").btn.btn-link &#10008; #{ligneList[i].dataValues.libLigne}
         
               - for(var j = 0; j < colonneList.length; j++){
                 -if(caseList[i][j].dataValues.estCoche){
-                   td(onclick="inverseItemState(#{caseList[i][j].dataValues.id},'#{nomMatiere}')").centerText &#10008;
+                  td
+                    button(onclick="inverseItemState(#{caseList[i][j].dataValues.id},'#{nomMatiere}')").centerText.center.btn.btn-light &#10008;
                 -}
                 -else{
-                  td(onclick="inverseItemState(#{caseList[i][j].dataValues.id},'#{nomMatiere}')")
+                  td
+                    button(onclick="inverseItemState(#{caseList[i][j].dataValues.id},'#{nomMatiere}')").centerText.center.btn.btn-outline-light &#10008;
                 -}
               - }
         - }

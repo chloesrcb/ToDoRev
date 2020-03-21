@@ -1,6 +1,6 @@
-
-
+//page questions réponses d'un test 
 include layout.jade
+
 -var quesRepList
 body(id="home-page")
   script(type="text/javascript").
@@ -17,7 +17,7 @@ body(id="home-page")
     p.subtitle.italic.centerText S'exercer
     .container.col-xs-12.col-sm-12.col-md-5.col-lg-5.col-xl-5.bg-light
       each question in questionsList
-        p.centerText #{question.dataValues.Question} 
+        .centerText #{question.dataValues.Question} 
         p.centerText
           strong(name="reponse" hidden) #{question.dataValues.Reponse}
       button(class="btn btn-primary center" onclick="revealResponse()") Correction

@@ -39,20 +39,23 @@ body(id="home-page")
         -if(!item.dataValues.done){
           .container
             .d-inline-block
-              input(type="checkbox" onclick="inverseItemState(#{item.dataValues.id},'#{nomMatiere}')")
+              button(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')").btn.btn-link.mb-1 &#10008;
+            .d-inline-block
+              input(type="checkbox" onclick="inverseItemState(#{item.dataValues.id},'#{nomMatiere}')").mr-3
             .d-inline-block
               p #{item.dataValues.contenu}
-                strong(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')") &#10008;
+                
         
         -}
         -else{
           .container
             .d-inline-block
-              input(type="checkbox" checked onclick="inverseItemState(#{item.dataValues.id},'#{nomMatiere}')")
+              button(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')").btn.btn-link.mb-1 &#10008;
+            .d-inline-block
+              input(type="checkbox" checked onclick="inverseItemState(#{item.dataValues.id},'#{nomMatiere}')").mr-1
               
             .d-inline-block
               del #{item.dataValues.contenu}
-              strong(onclick="deleteItem(#{item.dataValues.id},'#{nomMatiere}')") &#10008;
           
         -}
         
